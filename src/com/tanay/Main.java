@@ -15,7 +15,8 @@ public class Main {
     public static void main(String[] args) {
         initialize();
         ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
-        parkingLotDAO.createParkingLot(statement);
+//        parkingLotDAO.createParkingLot(statement);
+        parkingLotDAO.viewParkingLotByFilters(statement);
         close();
     }
 
