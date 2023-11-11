@@ -11,13 +11,13 @@ public class Main {
     private static Statement statement = null;
     private static ResultSet result = null;
 
-    private static ParkingLot parkingLot = new ParkingLot();
 
     public static void main(String[] args) {
         initialize();
-        String a = "abd";
-        String b = "anf";
-        parkingLot.insert(statement, a, b);
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.lot_name = "Work";
+        parkingLot.address = "2510 Avent Ferry Road";
+        parkingLot.insert(statement);
         close();
     }
 
