@@ -7,6 +7,11 @@ public class ParkingLot {
 
     String lot_name;
     String address;
+    
+    public ParkingLot(String lot_name, String address) {
+    	this.lot_name = lot_name;
+    	this.address = address;
+    }
 
     public String getLot_name() {
         return lot_name;

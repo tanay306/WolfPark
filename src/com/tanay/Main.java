@@ -14,10 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         initialize();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingLot.lot_name = "Work";
-        parkingLot.address = "2510 Avent Ferry Road";
-        parkingLot.insert(statement);
+        ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
+        parkingLotDAO.createParkingLot(statement);
         close();
     }
 
