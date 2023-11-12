@@ -14,12 +14,19 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         initialize();
+        
+        // Parking lot Queries
         ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
 //        parkingLotDAO.createParkingLot(statement, connection);
 //        parkingLotDAO.viewParkingLotByFilters(statement);
-        parkingLotDAO.updateParkingLot(statement);
-        parkingLotDAO.viewAllParkingLot(statement);
+//        parkingLotDAO.updateParkingLot(statement);
+//        parkingLotDAO.viewAllParkingLot(statement);
 
+     // Driver Queries
+    	DriverDAO driverDAO = new DriverDAO();
+//    		driverDAO.createDriver(statement);
+//    		driverDAO.viewAllDriver(statement);
+    		driverDAO.viewDriverByFilters(statement);
         close();
     }
 

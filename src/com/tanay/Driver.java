@@ -84,12 +84,28 @@ public class Driver {
         }
 	}
 	
+	// Returns all the rows in the Table
 	public ResultSet view(Statement statement) {
         String query = "SELECT * FROM driver;";
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
             System.out.println("Completed: Driver Query Select");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+	
+	
+	//	Returns Rows Based on Filters
+	public ResultSet viewFiltered(Statement statement, String queryParams) {
+        String query = "SELECT * FROM driver WHERE " + queryParams + ";";
+        ResultSet result = null;
+        System.out.println(query);
+        try {
+            result = statement.executeQuery(query);
+            System.out.println("Completed: Driver Query Select with Where");
         } catch (SQLException e) {
             e.printStackTrace();
         }
