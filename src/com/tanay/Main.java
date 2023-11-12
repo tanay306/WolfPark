@@ -13,10 +13,18 @@ public class Main {
 
 
     public static void main(String[] args) {
-        initialize();
-        ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
-//        parkingLotDAO.createParkingLot(statement);
-        parkingLotDAO.viewParkingLotByFilters(statement);
+    	initialize();
+    	
+    	// Parking Lot Queries
+//		ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
+//            parkingLotDAO.createParkingLot(statement);
+//            parkingLotDAO.viewParkingLotByFilters(statement);
+		
+		
+		// Driver Queries
+    	DriverDAO driverDAO = new DriverDAO();
+    			driverDAO.createDriver(statement);
+		
         close();
     }
 
