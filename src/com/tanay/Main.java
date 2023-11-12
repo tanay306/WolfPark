@@ -12,11 +12,13 @@ public class Main {
     private static ResultSet result = null;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         initialize();
         ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
-//        parkingLotDAO.createParkingLot(statement);
-        parkingLotDAO.viewParkingLotByFilters(statement);
+//        parkingLotDAO.createParkingLot(statement, connection);
+//        parkingLotDAO.viewParkingLotByFilters(statement);
+        parkingLotDAO.updateParkingLot(statement);
+        parkingLotDAO.viewAllParkingLot(statement);
         close();
     }
 

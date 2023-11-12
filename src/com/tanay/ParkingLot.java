@@ -31,6 +31,20 @@ public class ParkingLot {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    public void create(Statement statement) {
+        String query = "CREATE TABLE parkinglot("
+        		+ "lot_name VARCHAR (50),"
+        		+ "address VARCHAR (255) NOT NULL,"
+        		+ "PRIMARY KEY (lot_name)"
+        		+ ");";
+        try {
+            statement.executeQuery(query);
+            System.out.println("Completed: Parking Lot Query Create");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void insert(Statement statement) {
         String query = "INSERT INTO parkinglot VALUES ('" + this.lot_name + "','" + this.address + "');";
@@ -56,8 +70,8 @@ public class ParkingLot {
 
     public ResultSet viewFiltered(Statement statement, String queryParams) {
         String query = "SELECT * FROM parkinglot WHERE " + queryParams + ";";
-        System.out.println(query);
         ResultSet result = null;
+        System.out.println(query);
         try {
             result = statement.executeQuery(query);
             System.out.println("Completed: Parking Lot Query Select with Where");
@@ -65,5 +79,16 @@ public class ParkingLot {
             e.printStackTrace();
         }
         return result;
+    }
+    
+    public void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
+    	String query = "UPDATE parkinglot SET " + querySet + " WHERE " + queryParams + ";";
+        System.out.println(query);
+        try {
+            statement.executeUpdate(query);
+            System.out.println("Completed: Parking Lot Query Update");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
