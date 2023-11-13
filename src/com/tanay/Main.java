@@ -39,8 +39,11 @@ public class Main {
 //        SpaceDAO spaceDAO = new SpaceDAO();
 //        spaceDAO.menuSpace(statement, connection);
         
-        CitationDAO c = new CitationDAO();
-        c.menuCategory(statement, connection);
+//        CitationDAO c = new CitationDAO();
+//        c.menuCategory(statement, connection);
+        
+        ChecksDAO checks = new ChecksDAO();
+        checks.menuCategory(statement, connection);
 
         // Category
 //        CategoryDAO categoryDAO = new CategoryDAO();

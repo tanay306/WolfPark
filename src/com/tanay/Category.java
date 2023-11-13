@@ -49,6 +49,22 @@ public class Category {
         }
     	return true;
     }
+
+    protected boolean containsCategory(Statement statement, String category) {
+        ResultSet result = null;
+        String query = "Select * from category_fee where category = '" + category + "';";
+        try {
+            result = statement.executeQuery(query);
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     
     protected void create(Statement statement) {
     	String query = "CREATE TABLE category_fee ( category VARCHAR(50), fee INT NOT NULL, PRIMARY KEY (category) );";
