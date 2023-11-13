@@ -1,2 +1,6 @@
 /bin/
-/.metadata
+/.metadata/
+/.idea/
+.project
+.classpath
+WolfPark.iml
