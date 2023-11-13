@@ -34,14 +34,14 @@ public class Main {
 //        zoneDAO.updateParkingLot(statement);
 //        zoneDAO.deleteZoneByFilters(statement);
 //        zoneDAO.menuZone(statement, connection);
+        
+        // Space Queries
+        SpaceDAO spaceDAO = new SpaceDAO();
+        spaceDAO.menuSpace(statement, connection);
 
         // Category
 //        CategoryDAO categoryDAO = new CategoryDAO();
 //        categoryDAO.menuCategory(statement, connection);
-        
-        //Citation
-        CitationDAO citationDAO = new CitationDAO();
-        citationDAO.menuCategory(statement, connection);
         
      // Driver Queries
 //    	DriverDAO driverDAO = new DriverDAO();
