@@ -36,8 +36,11 @@ public class Main {
 //        zoneDAO.menuZone(statement, connection);
         
         // Space Queries
-        SpaceDAO spaceDAO = new SpaceDAO();
-        spaceDAO.menuSpace(statement, connection);
+//        SpaceDAO spaceDAO = new SpaceDAO();
+//        spaceDAO.menuSpace(statement, connection);
+        
+        CitationDAO c = new CitationDAO();
+        c.menuCategory(statement, connection);
 
         // Category
 //        CategoryDAO categoryDAO = new CategoryDAO();

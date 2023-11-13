@@ -47,7 +47,7 @@ public class CitationDAO {
 				citationDAO.updateCitation(statement);
 				break;
 			case "f":
-				// citationDAO.deleteCitationByFilters(statement);
+				 citationDAO.deleteCitationByFilters(statement);
 				break;
 			default:
 				System.out.println("Invalid Entry");
@@ -178,7 +178,6 @@ public class CitationDAO {
 	        	whereMap.put("space_number", sqlHelper.singleQuotes(space_number));
 	        }
 	        query = sqlHelper.merger(whereMap);
-            System.out.println(query);
 	        ResultSet result = citation.viewFiltered(statement, query);
 	        
 	        try {
@@ -251,28 +250,30 @@ public class CitationDAO {
         	System.out.println("Citation already present!");
         	return;
         }
-        if (! citation.containsCategory(statement, category_new) && category_new.length() > 0) {
+        if (category_new.length() > 0 && !citation.containsCategory(statement, category_new)) {
             System.out.println("Category not present!");
         	return;
         }
-        if (! citation.containsLot(statement, lot_name_new) && lot_name_new.length() > 0) {
+        if (lot_name_new.length() > 0 && !citation.containsLot(statement, lot_name_new)) {
             System.out.println("Parking Lot not present!");
         	return;
         }
-        if (! citation.containsZone(statement, zone_id_new) && zone_id_new.length() > 0) {
+        if (zone_id_new.length() > 0 && !citation.containsZone(statement, zone_id_new)) {
             System.out.println("Zone not present!");
         	return;
         }
-        if (! citation.containsSpace(statement, space_number_new) && space_number_new.length() > 0) {
+        if (space_number_new.length() > 0 && !citation.containsSpace(statement, space_number_new)) {
             System.out.println("Space not present!");
         	return;
         }
         String check_lot = lot_name_new == null ? lot_name: lot_name_new;
         String check_zone = zone_id_new == null ? zone_id: zone_id_new;
         String check_space = space_number_new == null ? space_number: space_number_new;
-        if (! citation.containsAll(statement, check_lot, check_zone, check_space)) {
-        	System.out.println("Invalid input!");
-        	return;
+        if (check_lot.length() > 0 && check_zone.length() > 0 && check_space.length() > 0 ) {
+	        if (! citation.containsAll(statement, check_lot, check_zone, check_space)) {
+	        	System.out.println("Invalid input!");
+	        	return;
+	        }
         }
         String queryWhere = "";
         String querySet = "";
@@ -333,9 +334,73 @@ public class CitationDAO {
             if(space_number_new.length() > 0) {
 	        	setMap.put("space_number", sqlHelper.singleQuotes(space_number_new));
 	        }
-	        querySet = sqlHelper.merger(setMap);
+	        querySet = sqlHelper.mergerUpdate(setMap);
 	        
 	        citation.viewUpdateFiltered(statement, queryWhere, querySet);
+        }
+	}
+
+    public void deleteCitationByFilters(Statement statement) {
+		SQLHelper.skipper();
+		System.out.print("Enter Citation Number (Int): ");
+		String citation_number = sc.nextLine();
+        SQLHelper.skipper();
+		System.out.print("Enter Citation Date (Date): ");
+        String citation_date = sc.nextLine();
+        SQLHelper.skipper();
+        System.out.print("Enter Citation Time (Time): ");
+        String citation_time = sc.nextLine();
+        SQLHelper.skipper();
+        System.out.print("Enter Category (String): ");
+        String category = sc.nextLine();
+        SQLHelper.skipper();
+        System.out.print("Enter Payment Status (Boolean): ");
+        String payment_status = sc.nextLine();
+        SQLHelper.skipper();
+        System.out.print("Enter Parking Lot (String): ");
+        String lot_name = sc.nextLine();
+        SQLHelper.skipper();
+        System.out.print("Enter Zone ID (String): ");
+        String zone_id = sc.nextLine();
+        SQLHelper.skipper();
+        System.out.print("Enter Space Number (String): ");
+        String space_number = sc.nextLine();
+        
+        Citation citation = new Citation(citation_number, citation_date, citation_time, category, payment_status, lot_name, zone_id, space_number);
+        String query = "";
+        
+        SQLHelper sqlHelper = new SQLHelper();
+        if(citation_number.length() + citation_date.length() + citation_time.length() + category.length() + payment_status.length() + lot_name.length() + zone_id.length() + space_number.length() == 0) {
+        	System.out.println("No Filters provided, showing all rows");
+        	viewAllCitation(statement);
+        } else {
+        	HashMap<String, String> whereMap = new HashMap<String, String>();
+	        if(citation_number.length() > 0) {
+	        	whereMap.put("citation_number", sqlHelper.singleQuotes(citation_number));
+	        }
+	        if(citation_date.length() > 0) {
+	        	whereMap.put("citation_date", sqlHelper.singleQuotes(citation_date));
+	        }
+            if(citation_time.length() > 0) {
+	        	whereMap.put("citation_time", sqlHelper.singleQuotes(citation_time));
+	        }
+            if(category.length() > 0) {
+	        	whereMap.put("category", sqlHelper.singleQuotes(category));
+	        }
+            if(payment_status.length() > 0) {
+	        	whereMap.put("payment_status", sqlHelper.singleQuotes(payment_status));
+	        }
+            if(lot_name.length() > 0) {
+	        	whereMap.put("lot_name", sqlHelper.singleQuotes(lot_name));
+	        }
+            if(zone_id.length() > 0) {
+	        	whereMap.put("zone_id", sqlHelper.singleQuotes(zone_id));
+	        }
+            if(space_number.length() > 0) {
+	        	whereMap.put("space_number", sqlHelper.singleQuotes(space_number));
+	        }
+	        query = sqlHelper.merger(whereMap);
+	        citation.deleteFiltered(statement, query);
         }
 	}
 

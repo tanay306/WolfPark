@@ -172,7 +172,7 @@ public class CategoryDAO {
 	        if(fee_new.length() > 0) {
 	        	setMap.put("fee", fee_new);
 	        }
-	        querySet = sqlHelper.merger(setMap);
+	        querySet = sqlHelper.mergerUpdate(setMap);
 	        
 	        category_.viewUpdateFiltered(statement, queryWhere, querySet);
         }

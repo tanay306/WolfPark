@@ -256,8 +256,7 @@ public class Citation {
 		
 		protected boolean containsAll(Statement statement, String lot_name, String zone_id, String space_number) {
 			ResultSet result = null;
-			String query = "Select * from space where lot_name = '" + lot_name + "'and zone_id = '" + zone_id + "'and space_number = " + space_number + " and  availability_slot = 0;";
-			System.out.println(query);
+			String query = "Select * from space where lot_name = '" + lot_name + "'and zone_id = '" + zone_id + "' and space_number = " + space_number + " and  availability_slot = 1;";
 			try {
 				result = statement.executeQuery(query);
 				if (result.next()) {
@@ -282,7 +281,6 @@ public class Citation {
 		}
 
 		protected void insert(Statement statement) {
-			System.out.println(this.payment_status == "true");
 			String query = "INSERT INTO citation VALUES ('" + this.citation_number + "','" + this.citation_date + "','" + this.citation_time + "','" + this.category + "','" + this.payment_status + "','" + this.lot_name + "','" + this.zone_id + "','" + this.space_number + "');";
 			try {
 				statement.executeUpdate(query);
@@ -318,7 +316,6 @@ public class Citation {
 
 		protected void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
 			String query = "UPDATE citation SET " + querySet + " WHERE " + queryParams + ";";
-			System.out.println(query);
 			try {
 				statement.executeUpdate(query);
 				System.out.println("Completed: Citation Query Update");
