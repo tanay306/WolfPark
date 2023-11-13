@@ -1,120 +1,118 @@
 package com.tanay;
 
-import java.util.HashMap;
-import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Scanner;
 
-public class ParkingLotDAO {
+public class ZoneDAO {
 	Scanner sc = new Scanner(System.in);
 	
-	public void menuParkingLot(Statement statement, Connection connection) {
-		System.out.print("\nParking Lot Sub-Menu\n"
-				+ "a. Create Parking Lot\n"
-				+ "b. Insert Parking Lot\n"
-				+ "c. View All Parking Lot\n"
-				+ "d. View Specific Parking Lot\n"
-				+ "e. Update Parking Lot\n"
-				+ "f. Delete Parking Lot\n"
+	public void menuZone(Statement statement, Connection connection) {
+		System.out.print("\nZone Sub-Menu\n"
+				+ "a. Create Zone\n"
+				+ "b. Insert Zone\n"
+				+ "c. View All Zone\n"
+				+ "d. View Specific Zone\n"
+				+ "e. Update Zone\n"
+				+ "f. Delete Zone\n"
 				+ "Select one option: ");
 		
-		ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+		ZoneDAO zoneDAO = new ZoneDAO();
 		String input = sc.nextLine();
 		switch(input) {
 			case "a": 
 				try {
-					parkingLotDAO.createParkingLot(statement, connection);
+					zoneDAO.createZone(statement, connection);
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());
 		            Main.close();
 				}
 				break;
 			case "b": 
-				parkingLotDAO.insertParkingLot(statement);
+				zoneDAO.insertZone(statement);
 				break;
 			case "c":
-				parkingLotDAO.viewAllParkingLot(statement);
+				zoneDAO.viewAllZone(statement);
 				break;
 			case "d":
-				parkingLotDAO.viewParkingLotByFilters(statement);
+				zoneDAO.viewZoneByFilters(statement);
 				break;
 			case "e":
-				parkingLotDAO.updateParkingLot(statement);
+				zoneDAO.updateParkingLot(statement);
 				break;
 			case "f":
-				parkingLotDAO.deleteParkingLotByFilters(statement);
+				zoneDAO.deleteZoneByFilters(statement);
 				break;
 			default:
 				System.out.println("Invalid Entry");
 		}
 	}
 	
-	public void createParkingLot(Statement statement, Connection connection) throws SQLException {
-		if(SQLHelper.tableExists(connection, "parkinglot")) {
+	public void createZone(Statement statement, Connection connection) throws SQLException {
+		if(SQLHelper.tableExists(connection, "zone")) {
 			System.out.println("Table Already Exists");
 		} else {
-			ParkingLot parkingLot = new ParkingLot();
-			parkingLot.create(statement);
+			Zone.create(statement);
 		}
 	}
 	
-	public void insertParkingLot(Statement statement) {
+	public void insertZone(Statement statement) {
 		System.out.print("Enter Lot Name (String): ");
 		String lot_name = sc.nextLine();
-		System.out.print("Enter Address (String): ");
-        String address = sc.nextLine();
+		System.out.print("Enter Zone ID (String): ");
+        String zone_id = sc.nextLine();
         
-        ParkingLot parkingLot = new ParkingLot(lot_name, address);
-        parkingLot.insert(statement);
+        Zone zone = new Zone(lot_name, zone_id);
+        zone.insert(statement);
 	}
 	
-	public void viewAllParkingLot(Statement statement) {
-		ParkingLot parkingLot = new ParkingLot();
-		ResultSet result = parkingLot.view(statement);
+	public void viewAllZone(Statement statement) {
+		ResultSet result = Zone.view(statement);
 		
 		try {
 			while (result.next()) {
-				System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("address") + ")]");
+				System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("zone_id") + ")]");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void viewParkingLotByFilters(Statement statement) {
+	public void viewZoneByFilters(Statement statement) {
 		SQLHelper.skipper();
 		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
 		
 		SQLHelper.skipper();
-		System.out.print("Enter Address (String): ");
-        String address = sc.nextLine();
+		System.out.print("Enter Zone ID (String): ");
+        String zone_id = sc.nextLine();
         
-        ParkingLot parkingLot = new ParkingLot(lot_name, address);
+        Zone zone = new Zone(lot_name, zone_id);
         String query = "";
         
         SQLHelper sqlHelper = new SQLHelper();
-        if(lot_name.length() + address.length() == 0) {
+        if(lot_name.length() + zone_id.length() == 0) {
         	System.out.println("No Filters provided, showing all rows");
-        	viewAllParkingLot(statement);
+        	viewAllZone(statement);
         } else {
         	HashMap<String, String> whereMap = new HashMap<String, String>();
 	        if(lot_name.length() > 0) {
 	        	whereMap.put("lot_name", sqlHelper.singleQuotes(lot_name));
 	        }
-	        if(address.length() > 0) {
-	        	whereMap.put("address", sqlHelper.singleQuotes(address));
+	        if(zone_id.length() > 0) {
+	        	whereMap.put("zone_id", sqlHelper.singleQuotes(zone_id));
 	        }
 	        
 	        query = sqlHelper.merger(whereMap);
-	        ResultSet result = parkingLot.viewFiltered(statement, query);
+	        ResultSet result = zone.viewFiltered(statement, query);
 	        
 	        try {
 	        	if(result.next()) {
 	        		do{
-	        			System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("address") + ")]");
+	        			System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("zone_id") + ")]");
 	        		}while (result.next());
 	        	} else {
 	        		System.out.println("*** No Rows returned ***");
@@ -135,27 +133,27 @@ public class ParkingLotDAO {
 		String lot_name_new = sc.nextLine();
 		
 		SQLHelper.skipper();
-		System.out.print("Enter Address(String): ");
-        String address = sc.nextLine();
+		System.out.print("Enter Zone ID(String): ");
+        String zone_id = sc.nextLine();
         
         SQLHelper.skipper();
-        System.out.print("Enter NEW Address(String): ");
-		String address_new = sc.nextLine();
+        System.out.print("Enter NEW Zone ID(String): ");
+		String zone_id_new = sc.nextLine();
         
-        ParkingLot parkingLot = new ParkingLot(lot_name, address);
+        Zone zone = new Zone(lot_name, zone_id);
         String queryWhere = "";
         String querySet = "";
         
         SQLHelper sqlHelper = new SQLHelper();
-        if(lot_name.length() + address.length() == 0 || lot_name_new.length() + address_new.length() == 0) {
+        if(lot_name.length() + zone_id.length() == 0 || lot_name_new.length() + zone_id_new.length() == 0) {
         	System.out.println("No Filters provided, cannot update a row");
         } else {
         	HashMap<String, String> whereMap = new HashMap<String, String>();
 	        if(lot_name.length() > 0) {
 	        	whereMap.put("lot_name", sqlHelper.singleQuotes(lot_name));
 	        }
-	        if(address.length() > 0) {
-	        	whereMap.put("address", sqlHelper.singleQuotes(address));
+	        if(zone_id.length() > 0) {
+	        	whereMap.put("zone_id", sqlHelper.singleQuotes(zone_id));
 	        }
 	        
 	        queryWhere = sqlHelper.merger(whereMap);
@@ -164,42 +162,41 @@ public class ParkingLotDAO {
 	        if(lot_name_new.length() > 0) {
 	        	setMap.put("lot_name", sqlHelper.singleQuotes(lot_name_new));
 	        }
-	        if(address_new.length() > 0) {
-	        	setMap.put("address", sqlHelper.singleQuotes(address_new));
+	        if(zone_id_new.length() > 0) {
+	        	setMap.put("zone_id", sqlHelper.singleQuotes(zone_id_new));
 	        }
 	        querySet = sqlHelper.merger(setMap);
 	        
-	        parkingLot.viewUpdateFiltered(statement, queryWhere, querySet);
+	        zone.updateFiltered(statement, queryWhere, querySet);;
         }
 	}
 	
-	public void deleteParkingLotByFilters(Statement statement) {
+	public void deleteZoneByFilters(Statement statement) {
 		SQLHelper.skipper();
 		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
 		
 		SQLHelper.skipper();
-		System.out.print("Enter Address (String): ");
-        String address = sc.nextLine();
+		System.out.print("Enter Zone ID (String): ");
+        String zone_id = sc.nextLine();
         
-        ParkingLot parkingLot = new ParkingLot(lot_name, address);
         String query = "";
         
         SQLHelper sqlHelper = new SQLHelper();
-        if(lot_name.length() + address.length() == 0) {
+        if(lot_name.length() + zone_id.length() == 0) {
         	System.out.println("No Filters provided, showing all rows");
-        	viewAllParkingLot(statement);
+        	viewAllZone(statement);
         } else {
         	HashMap<String, String> whereMap = new HashMap<String, String>();
 	        if(lot_name.length() > 0) {
 	        	whereMap.put("lot_name", sqlHelper.singleQuotes(lot_name));
 	        }
-	        if(address.length() > 0) {
-	        	whereMap.put("address", sqlHelper.singleQuotes(address));
+	        if(zone_id.length() > 0) {
+	        	whereMap.put("zone_id", sqlHelper.singleQuotes(zone_id));
 	        }
 	        
 	        query = sqlHelper.merger(whereMap);
-	        parkingLot.deleteFiltered(statement, query);
+	        Zone.deleteFiltered(statement, query);
         }
 	}
 }

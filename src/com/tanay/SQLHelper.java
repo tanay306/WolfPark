@@ -10,6 +10,10 @@ public class SQLHelper {
 		return "'" + word + "'";
 	}
 	
+	public static void skipper() {
+		System.out.println("\nClick enter to skip this filter");
+	}
+	
 	public static boolean tableExists(Connection connection, String tableName) throws SQLException {
         String checkTableQuery = "SHOW TABLES LIKE ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(checkTableQuery)) {
