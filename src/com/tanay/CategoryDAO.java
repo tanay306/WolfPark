@@ -114,9 +114,7 @@ public class CategoryDAO {
 	        if(String.valueOf(fee).length() > 0) {
 	        	whereMap.put("fee", fee);
 	        }
-	        List<String> list = new ArrayList<>();
-            list.add("fee");
-	        query = sqlHelper.merger(whereMap, list);
+	        query = sqlHelper.merger(whereMap);
 	        ResultSet result = category_.viewFiltered(statement, query);
 	        
 	        try {
@@ -165,9 +163,7 @@ public class CategoryDAO {
 	        if(fee.length() > 0) {
 	        	whereMap.put("fee", fee);
 	        }
-	        List<String> list = new ArrayList<>();
-            list.add("fee");
-	        queryWhere = sqlHelper.merger(whereMap, list);
+	        queryWhere = sqlHelper.merger(whereMap);
 	        
 	        HashMap<String, String> setMap = new HashMap<String, String>();
 	        if(category_new.length() > 0) {
@@ -176,7 +172,7 @@ public class CategoryDAO {
 	        if(fee_new.length() > 0) {
 	        	setMap.put("fee", fee_new);
 	        }
-	        querySet = sqlHelper.merger(setMap, list);
+	        querySet = sqlHelper.merger(setMap);
 	        
 	        category_.viewUpdateFiltered(statement, queryWhere, querySet);
         }
@@ -206,9 +202,7 @@ public class CategoryDAO {
 	        if(fee.length() > 0) {
 	        	whereMap.put("fee", fee);
 	        }
-	        List<String> list = new ArrayList<>();
-            list.add("fee");
-	        query = sqlHelper.merger(whereMap, list);
+	        query = sqlHelper.merger(whereMap);
 	        category_.deleteFiltered(statement, query);
         }
 	}

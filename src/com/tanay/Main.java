@@ -36,8 +36,12 @@ public class Main {
 //        zoneDAO.menuZone(statement, connection);
 
         // Category
-        CategoryDAO categoryDAO = new CategoryDAO();
-        categoryDAO.menuCategory(statement, connection);
+//        CategoryDAO categoryDAO = new CategoryDAO();
+//        categoryDAO.menuCategory(statement, connection);
+        
+        //Citation
+        CitationDAO citationDAO = new CitationDAO();
+        citationDAO.menuCategory(statement, connection);
         
      // Driver Queries
 //    	DriverDAO driverDAO = new DriverDAO();

@@ -61,7 +61,7 @@ public class Category {
     }
 
     protected void insert(Statement statement) {
-    	String query = "INSERT INTO category_fee VALUES ('" + this.category + "','" + Integer.valueOf(this.fee) + "');";
+    	String query = "INSERT INTO category_fee VALUES ('" + this.category + "','" + this.fee + "');";
         try {
             statement.executeUpdate(query);
             System.out.println("Completed: Category Fee Query Insert");
@@ -87,7 +87,7 @@ public class Category {
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
-            System.out.println("Completed: Category_Fee Query Select with Where");
+            System.out.println("Completed: Category Fee Query Select with Where");
         } catch (SQLException e) {
             e.printStackTrace();
         }
