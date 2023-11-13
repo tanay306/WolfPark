@@ -4,10 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
 public class SQLHelper {
+
+
 	public String singleQuotes(String word) {
 		return "'" + word + "'";
+	}
+	
+	public static void skipper() {
+		System.out.println("\nClick enter to skip this filter");
 	}
 	
 	public static boolean tableExists(Connection connection, String tableName) throws SQLException {
@@ -27,6 +34,24 @@ public class SQLHelper {
 			result += key + "=" + map.get(key);
 //            System.out.println("Key: " + key + ", Value: " + map.get(key));
         }
+		return result;
+	}
+
+	public String merger(HashMap<String, String> map, List<String> list) {
+		String result = "";
+		for (String key: map.keySet()) {
+			if (list.contains(key)) {
+				if(result.length() > 0) {
+					result += " AND ";
+				}
+				result += key + "=" + Integer.valueOf(map.get(key));
+			} else {
+				if(result.length() > 0) {
+					result += " AND ";
+				}
+				result += key + "=" + map.get(key);
+			}
+		} 
 		return result;
 	}
 }

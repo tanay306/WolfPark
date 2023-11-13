@@ -11,8 +11,7 @@ public class ParkingLotDAO {
 	Scanner sc = new Scanner(System.in);
 	
 	public void createParkingLot(Statement statement, Connection connection) throws SQLException {
-		SQLHelper sqlHelper = new SQLHelper();
-		if(sqlHelper.tableExists(connection, "parkinglot")) {
+		if(SQLHelper.tableExists(connection, "parkinglot")) {
 			System.out.println("Table Already Exists");
 		} else {
 			ParkingLot parkingLot = new ParkingLot();
@@ -44,9 +43,12 @@ public class ParkingLotDAO {
 	}
 	
 	public void viewParkingLotByFilters(Statement statement) {
-		System.out.print("Click enter to skip this filter\nEnter Lot Name(String): ");
+		SQLHelper.skipper();
+		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
-		System.out.print("Click enter to skip this filter\nEnter Address (String): ");
+		
+		SQLHelper.skipper();
+		System.out.print("Enter Address (String): ");
         String address = sc.nextLine();
         
         ParkingLot parkingLot = new ParkingLot(lot_name, address);
@@ -83,14 +85,20 @@ public class ParkingLotDAO {
 	}
 	
 	public void updateParkingLot(Statement statement) {
-		System.out.print("Click enter to skip this filter\nEnter Lot Name(String): ");
+		SQLHelper.skipper();
+		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
-		System.out.print("Click enter to skip this filter\nEnter NEW Lot Name(String): ");
+		
+		SQLHelper.skipper();
+		System.out.print("Enter NEW Lot Name(String): ");
 		String lot_name_new = sc.nextLine();
 		
-		System.out.print("Click enter to skip this filter\nEnter Address(String): ");
+		SQLHelper.skipper();
+		System.out.print("Enter Address(String): ");
         String address = sc.nextLine();
-        System.out.print("Click enter to skip this filter\nEnter NEW Address(String): ");
+        
+        SQLHelper.skipper();
+        System.out.print("Enter NEW Address(String): ");
 		String address_new = sc.nextLine();
         
         ParkingLot parkingLot = new ParkingLot(lot_name, address);
@@ -113,15 +121,14 @@ public class ParkingLotDAO {
 	        
 	        HashMap<String, String> setMap = new HashMap<String, String>();
 	        if(lot_name.length() > 0) {
-	        	setMap.put("lot_name", sqlHelper.singleQuotes(lot_name));
+	        	whereMap.put("lot_name", sqlHelper.singleQuotes(lot_name));
 	        }
 	        if(address.length() > 0) {
-	        	setMap.put("address", sqlHelper.singleQuotes(address));
+	        	whereMap.put("address", sqlHelper.singleQuotes(address));
 	        }
 	        
-	        querySet = sqlHelper.merger(whereMap);
-	        
-	        parkingLot.viewUpdateFiltered(statement, queryWhere, querySet);
+	        query = sqlHelper.merger(whereMap);
+	        parkingLot.deleteFiltered(statement, query);
         }
 	}
 }

@@ -6,33 +6,33 @@ import java.sql.ResultSet;
 
 public class ParkingLot {
 
-    String lot_name;
-    String address;
+    private String lot_name;
+    private String address;
     
-    public ParkingLot() {}
+    private ParkingLot() {}
     
-    public ParkingLot(String lot_name, String address) {
+    private ParkingLot(String lot_name, String address) {
     	this.lot_name = lot_name;
     	this.address = address;
     }
 
-    public String getLot_name() {
+    private String getLot_name() {
         return lot_name;
     }
 
-    public void setLot_name(String lot_name) {
+    private void setLot_name(String lot_name) {
         this.lot_name = lot_name;
     }
 
-    public String getAddress() {
+    private String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    private void setAddress(String address) {
         this.address = address;
     }
     
-    public void create(Statement statement) {
+    private void create(Statement statement) {
         String query = "CREATE TABLE parkinglot("
         		+ "lot_name VARCHAR (50),"
         		+ "address VARCHAR (255) NOT NULL,"
@@ -43,32 +43,35 @@ public class ParkingLot {
             System.out.println("Completed: Parking Lot Query Create");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            Main.close();
         }
     }
 
-    public void insert(Statement statement) {
+    private void insert(Statement statement) {
         String query = "INSERT INTO parkinglot VALUES ('" + this.lot_name + "','" + this.address + "');";
         try {
             statement.executeUpdate(query);
             System.out.println("Completed: Parking Lot Query Insert");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println(e.getMessage());
+            Main.close();
         }
     }
     
-    public ResultSet view(Statement statement) {
+    private ResultSet view(Statement statement) {
         String query = "SELECT * FROM parkinglot;";
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
             System.out.println("Completed: Parking Lot Query Select");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println(e.getMessage());
+            Main.close();
         }
         return result;
     }
 
-    public ResultSet viewFiltered(Statement statement, String queryParams) {
+    private ResultSet viewFiltered(Statement statement, String queryParams) {
         String query = "SELECT * FROM parkinglot WHERE " + queryParams + ";";
         ResultSet result = null;
         System.out.println(query);
@@ -76,19 +79,33 @@ public class ParkingLot {
             result = statement.executeQuery(query);
             System.out.println("Completed: Parking Lot Query Select with Where");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println(e.getMessage());
+            Main.close();
         }
         return result;
     }
     
-    public void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
+    private void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
     	String query = "UPDATE parkinglot SET " + querySet + " WHERE " + queryParams + ";";
         System.out.println(query);
         try {
             statement.executeUpdate(query);
             System.out.println("Completed: Parking Lot Query Update");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println(e.getMessage());
+            Main.close();
+        }
+    }
+    
+    private void deleteFiltered(Statement statement, String queryParams) {
+        String query = "DELETE FROM parkinglot WHERE " + queryParams + ";";
+        System.out.println(query);
+        try {
+            statement.executeQuery(query);
+            System.out.println("Completed: Parking Lot Query Delete");
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage());
+            Main.close();
         }
     }
 }
