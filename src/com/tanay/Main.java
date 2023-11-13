@@ -26,15 +26,19 @@ public class Main {
 //        parkingLotDAO.menuParkingLot(statement, connection);
         
         // Zone Queries
-        ZoneDAO zoneDAO = new ZoneDAO();
+//        ZoneDAO zoneDAO = new ZoneDAO();
 //        zoneDAO.createZone(statement, connection);
 //        zoneDAO.insertZone(statement);
 //        zoneDAO.viewAllZone(statement);
 //        zoneDAO.viewZoneByFilters(statement);
 //        zoneDAO.updateParkingLot(statement);
 //        zoneDAO.deleteZoneByFilters(statement);
-        zoneDAO.menuZone(statement, connection);
+//        zoneDAO.menuZone(statement, connection);
 
+        // Category
+        CategoryDAO categoryDAO = new CategoryDAO();
+        categoryDAO.menuCategory(statement, connection);
+        
      // Driver Queries
 //    	DriverDAO driverDAO = new DriverDAO();
 //    		driverDAO.createDriver(statement);
