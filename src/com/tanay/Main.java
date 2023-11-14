@@ -36,14 +36,49 @@ public class Main {
 //        zoneDAO.menuZone(statement, connection);
 
         // Category
-        CategoryDAO categoryDAO = new CategoryDAO();
-        categoryDAO.menuCategory(statement, connection);
+//        CategoryDAO categoryDAO = new CategoryDAO();
+//        categoryDAO.menuCategory(statement, connection);
         
      // Driver Queries
 //    	DriverDAO driverDAO = new DriverDAO();
-//    		driverDAO.createDriver(statement);
-//    		driverDAO.viewAllDriver(statement);
-//    		driverDAO.viewDriverByFilters(statement);
+//        driverDAO.createDriver(statement, connection);
+//        driverDAO.insertDriver(statement);
+//        driverDAO.viewAllDriver(statement);
+//        driverDAO.viewDriverByFilters(statement);
+//        driverDAO.updateDriver(statement);
+//        driverDAO.deleteDriverByFilters(statement);
+//        driverDAO.menuDriver(statement, connection);
+        
+     // Vehicle Queries
+//    	VehicleDAO vehicleDAO = new VehicleDAO();
+//        vehicleDAO.createVehicle(statement, connection);
+//        vehicleDAO.insertVehicle(statement);
+//        vehicleDAO.viewAllVehicle(statement);
+//        vehicleDAO.viewVehicleByFilters(statement);
+//        vehicleDAO.updateVehicle(statement);
+//        vehicleDAO.deleteVehicleByFilters(statement);
+//        vehicleDAO.menuVehicle(statement, connection);
+        
+     // Permit Queries
+//    	PermitDAO permitDAO = new PermitDAO();
+//        permitDAO.createPermit(statement, connection);
+//        permitDAO.insertPermit(statement);
+//        permitDAO.viewAllPermit(statement);
+//        permitDAO.viewPermitByFilters(statement);
+//        permitDAO.updatePermit(statement);
+//        permitDAO.deletePermitByFilters(statement);
+//        permitDAO.menuPermit(statement, connection);
+        
+     // HasPermit Queries
+   	HasPermitDAO hasPermitDAO = new HasPermitDAO();
+//        hasPermitDAO.createHasPermit(statement, connection);
+//        hasPermitDAO.insertHasPermit(statement);
+//        hasPermitDAO.viewAllHasPermit(statement);
+//        hasPermitDAO.viewHasPermitByFilters(statement);
+//        hasPermitDAO.updateHasPermit(statement);
+//        hasPermitDAO.deleteHasPermitByFilters(statement);
+       hasPermitDAO.menuHasPermit(statement, connection);
+        
         close();
     }
 

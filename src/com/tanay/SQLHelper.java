@@ -36,6 +36,18 @@ public class SQLHelper {
         }
 		return result;
 	}
+	
+	public String merger(HashMap<String, String> map, String operand) {
+		String result = "";
+		for (String key : map.keySet()) {
+			if(result.length() > 0) {
+				result += operand;
+			}
+			result += key + "=" + map.get(key);
+//            System.out.println("Key: " + key + ", Value: " + map.get(key));
+        }
+		return result;
+	}
 
 	public String merger(HashMap<String, String> map, List<String> list) {
 		String result = "";
