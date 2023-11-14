@@ -9,30 +9,30 @@ public class ParkingLot {
     private String lot_name;
     private String address;
     
-    private ParkingLot() {}
+    protected ParkingLot() {}
     
-    private ParkingLot(String lot_name, String address) {
+    protected ParkingLot(String lot_name, String address) {
     	this.lot_name = lot_name;
     	this.address = address;
     }
 
-    private String getLot_name() {
+    protected String getLot_name() {
         return lot_name;
     }
 
-    private void setLot_name(String lot_name) {
+    protected void setLot_name(String lot_name) {
         this.lot_name = lot_name;
     }
 
-    private String getAddress() {
+    protected String getAddress() {
         return address;
     }
 
-    private void setAddress(String address) {
+    protected void setAddress(String address) {
         this.address = address;
     }
     
-    private void create(Statement statement) {
+    protected void create(Statement statement) {
         String query = "CREATE TABLE parkinglot("
         		+ "lot_name VARCHAR (50),"
         		+ "address VARCHAR (255) NOT NULL,"
@@ -47,7 +47,7 @@ public class ParkingLot {
         }
     }
 
-    private void insert(Statement statement) {
+    protected void insert(Statement statement) {
         String query = "INSERT INTO parkinglot VALUES ('" + this.lot_name + "','" + this.address + "');";
         try {
             statement.executeUpdate(query);
@@ -58,7 +58,7 @@ public class ParkingLot {
         }
     }
     
-    private ResultSet view(Statement statement) {
+    protected ResultSet view(Statement statement) {
         String query = "SELECT * FROM parkinglot;";
         ResultSet result = null;
         try {
@@ -71,7 +71,7 @@ public class ParkingLot {
         return result;
     }
 
-    private ResultSet viewFiltered(Statement statement, String queryParams) {
+    protected ResultSet viewFiltered(Statement statement, String queryParams) {
         String query = "SELECT * FROM parkinglot WHERE " + queryParams + ";";
         ResultSet result = null;
         System.out.println(query);
@@ -85,7 +85,7 @@ public class ParkingLot {
         return result;
     }
     
-    private void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
+    protected void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
     	String query = "UPDATE parkinglot SET " + querySet + " WHERE " + queryParams + ";";
         System.out.println(query);
         try {
@@ -97,7 +97,7 @@ public class ParkingLot {
         }
     }
     
-    private void deleteFiltered(Statement statement, String queryParams) {
+    protected void deleteFiltered(Statement statement, String queryParams) {
         String query = "DELETE FROM parkinglot WHERE " + queryParams + ";";
         System.out.println(query);
         try {

@@ -51,7 +51,7 @@ public class ZoneDAO {
 		}
 	}
 	
-	public void createZone(Statement statement, Connection connection) throws SQLException {
+	private void createZone(Statement statement, Connection connection) throws SQLException {
 		if(SQLHelper.tableExists(connection, "zone")) {
 			System.out.println("Table Already Exists");
 		} else {
@@ -59,17 +59,23 @@ public class ZoneDAO {
 		}
 	}
 	
-	public void insertZone(Statement statement) {
+	private void insertZone(Statement statement) {
 		System.out.print("Enter Lot Name (String): ");
 		String lot_name = sc.nextLine();
 		System.out.print("Enter Zone ID (String): ");
         String zone_id = sc.nextLine();
         
         Zone zone = new Zone(lot_name, zone_id);
+        
+        if (!zone.containsParkingLot(statement)) {
+        	System.out.println("Parking Lot not present!");
+        	return;
+        }
+        
         zone.insert(statement);
 	}
 	
-	public void viewAllZone(Statement statement) {
+	private void viewAllZone(Statement statement) {
 		ResultSet result = Zone.view(statement);
 		
 		try {
@@ -81,7 +87,7 @@ public class ZoneDAO {
 		}
 	}
 	
-	public void viewZoneByFilters(Statement statement) {
+	private void viewZoneByFilters(Statement statement) {
 		SQLHelper.skipper();
 		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
@@ -123,7 +129,7 @@ public class ZoneDAO {
         }
 	}
 	
-	public void updateParkingLot(Statement statement) {
+	private void updateParkingLot(Statement statement) {
 		SQLHelper.skipper();
 		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
@@ -165,13 +171,13 @@ public class ZoneDAO {
 	        if(zone_id_new.length() > 0) {
 	        	setMap.put("zone_id", sqlHelper.singleQuotes(zone_id_new));
 	        }
-	        querySet = sqlHelper.merger(setMap);
+	        querySet = sqlHelper.mergerUpdate(setMap);
 	        
 	        zone.updateFiltered(statement, queryWhere, querySet);;
         }
 	}
 	
-	public void deleteZoneByFilters(Statement statement) {
+	private void deleteZoneByFilters(Statement statement) {
 		SQLHelper.skipper();
 		System.out.print("Enter Lot Name(String): ");
 		String lot_name = sc.nextLine();
