@@ -116,12 +116,12 @@ public class PermitDAO {
         	return;
         }
 		
-		if ( status == 'E' && (no_of_permits_count == 2 || special_event_count == 2)) {
-			System.out.println("Maximum permit limit reached for Employee i.e 2, Cannot add a Permit!");
+		if ( status == 'E' && ((no_of_permits_count == 2 && special_event == '0') || (special_event_count == 2 && special_event =='1'))) {
+			System.out.println("Maximum permit limit reached for Employee i.e 2 + 2, Cannot add a Permit!");
         	return;
 		}
 		
-		if (status == 'S' && (no_of_permits_count == 1 || special_event_count == 1)) {
+		if (status == 'S' && ((no_of_permits_count == 1 && special_event == '0') || (special_event_count == 1 && special_event =='1'))) {
 			System.out.println("Maximum permit limit reached for Student i.e 1 + 1, Cannot add a Permit!");
         	return;
 		}
@@ -133,7 +133,9 @@ public class PermitDAO {
 		
 		permit.insert(statement);
 		hasPermit.insert(statement);
-		if(special_event == '0') {
+		if(status == 'V') {
+			hasPermit.updateDriver(statement, 0);
+		} else if(special_event == '0') {
 			hasPermit.updateDriver(statement, no_of_permits_count);
 		}		
 	}

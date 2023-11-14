@@ -94,12 +94,22 @@ public class HasPermitDAO {
 		int no_of_permits_count = Integer.parseInt(hasPermit.noOfPermits(statement));
 		int special_event_count = hasPermit.noOfSpecialPermit(statement);
 		
-		if ( status == 'E' && (no_of_permits_count == 2 || special_event_count == 2)) {
-			System.out.println("Maximum permit limit reached for Employee i.e 2, Cannot add a Permit!");
+		char special_event_char = '0';
+		switch(special_event) {
+		case "special event":
+			special_event_char = '1';
+			break;
+		case "Park & Ride":
+			special_event_char = '1';
+			break;
+	}
+		
+		if ( status == 'E' && ((no_of_permits_count == 2 && special_event_char == '0') || (special_event_count == 2 && special_event_char =='1'))) {
+			System.out.println("Maximum permit limit reached for Employee i.e 2 + 2, Cannot add a Permit!");
         	return;
 		}
 		
-		if (status == 'S' && (no_of_permits_count == 1 || special_event_count == 1)) {
+		if (status == 'S' && ((no_of_permits_count == 1 && special_event_char == '0') || (special_event_count == 1 && special_event_char =='1'))) {
 			System.out.println("Maximum permit limit reached for Student i.e 1 + 1, Cannot add a Permit!");
         	return;
 		}
