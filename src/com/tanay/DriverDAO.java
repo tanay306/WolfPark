@@ -283,6 +283,13 @@ public class DriverDAO {
 	        	}
 	        }
 	        
+	        if(univ_id_new.length() > 0 && phone_number_new.length() > 0) {
+				if(Driver.containsDriver(statement, univ_id_new, phone_number_new)) {
+	        		System.out.println("Driver is already registered, Incorrect University Id or Phone Number!");
+	            	return;
+	        	}
+			}
+	        
 	        driver.updateFiltered(statement, queryWhere, querySet);
 	       
         }

@@ -82,17 +82,60 @@ public class PermitDAO {
 		
 		Permit permit = new Permit(permit_id, start_date, expiration_date, expiration_time, vehicle_id, type);
 		
+		char special_event = '0';
+		String univ_id = permit.getUnivId(statement);
+		String phone_number = permit.getPhoneNumber(statement);
+		
+		switch(type) {
+			case "special event":
+				special_event = '1';
+				break;
+			case "Park & Ride":
+				special_event = '1';
+				break;
+		}
+		
+		HasPermit hasPermit = new HasPermit(univ_id, phone_number, permit_id, String.valueOf(special_event));
+		
 		if (permit.containsPermit(statement)) {
         	System.out.println("Permit already present!");
         	return;
         }
 		
-		if (!permit.containsVehicle(statement)) {
+		if (!permit.containsVehicleForeign(statement)) {
         	System.out.println("Vehicle license number is incorrect, Vehicle is not registered!");
         	return;
         }
 		
+		char status = hasPermit.status(statement).charAt(0);
+		int no_of_permits_count = Integer.parseInt(hasPermit.noOfPermits(statement));
+		int special_event_count = hasPermit.noOfSpecialPermit(statement);
+		
+		if (hasPermit.containsHasPermitAll(statement)) {
+        	System.out.println("Duplicate Primary key, Cannot insert this ROW.");
+        	return;
+        }
+		
+		if ( status == 'E' && (no_of_permits_count == 2 || special_event_count == 2)) {
+			System.out.println("Maximum permit limit reached for Employee i.e 2, Cannot add a Permit!");
+        	return;
+		}
+		
+		if (status == 'S' && (no_of_permits_count == 1 || special_event_count == 1)) {
+			System.out.println("Maximum permit limit reached for Student i.e 1 + 1, Cannot add a Permit!");
+        	return;
+		}
+		
+		if (status == 'V' && no_of_permits_count == 1) {
+			System.out.println("Maximum permit limit reached for Visitor i.e 1, Cannot add a Permit!");
+        	return;
+		}
+		
 		permit.insert(statement);
+		hasPermit.insert(statement);
+		if(special_event == '0') {
+			hasPermit.updateDriver(statement, no_of_permits_count);
+		}		
 	}
 	
 	public void viewAllPermit(Statement statement) {
@@ -287,7 +330,13 @@ public class PermitDAO {
 	        }
 	        if(vehicle_id_new.length() > 0) {
 	        	setMap.put("vehicle_id", sqlHelper.singleQuotes(vehicle_id_new));
-	        	if (!Permit.containsVehicle(statement, vehicle_id_new)) {
+	        	
+	        	if (Permit.containsVehicle(statement, vehicle_id_new)) {
+	            	System.out.println("Vehicle already registered!");
+	            	return;
+	            }
+	        	
+	        	if (!Permit.containsVehicleForeign(statement, vehicle_id_new)) {
 	            	System.out.println("Vehicle license number is incorrect, Vehicle is not registered!");
 	            	return;
 	            }

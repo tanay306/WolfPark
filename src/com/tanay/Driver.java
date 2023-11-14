@@ -57,6 +57,22 @@ public class Driver {
     	return true;
     }
 	
+	protected static boolean containsDriver(Statement statement, String univ_id, String phone_number) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + univ_id+ "' AND phone_number = '" + phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
 	// Insert one row in the Drivers Table
 	protected void insert(Statement statement) {
 		String query = "INSERT INTO driver VALUES ('" + this.univ_id + "','" + this.phone_number + "','" 

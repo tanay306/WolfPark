@@ -44,6 +44,36 @@ public class Permit {
         }
     }
 	
+	
+	protected String getUnivId(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM vehicle WHERE license_number = '" + this.vehicle_id +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return result.getString("univ_id");
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return "0";
+    }
+	
+	protected String getPhoneNumber(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM vehicle WHERE license_number = '" + this.vehicle_id +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return result.getString("phone_number");
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return "0";
+    }
+	
+	
 	protected boolean containsPermit(Statement statement) {
     	ResultSet result = null;
     	String query = "SELECT * FROM permit WHERE permit_id = '" + this.permit_id +  "';";
@@ -78,7 +108,7 @@ public class Permit {
 	
 	protected boolean containsVehicle(Statement statement) {
     	ResultSet result = null;
-    	String query = "SELECT * FROM vehicle WHERE license_number = '" + this.vehicle_id +  "';";
+    	String query = "SELECT * FROM permit WHERE vehicle_id = '" + this.vehicle_id +  "';";
     	try {
     		result = statement.executeQuery(query);
     		if (result.next()) {
@@ -93,6 +123,38 @@ public class Permit {
     }
 	
 	protected static boolean containsVehicle(Statement statement, String vehicle_id) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM permit WHERE vehicle_id = '" + vehicle_id +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected boolean containsVehicleForeign(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM vehicle WHERE license_number = '" + this.vehicle_id +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected static boolean containsVehicleForeign(Statement statement, String vehicle_id) {
     	ResultSet result = null;
     	String query = "SELECT * FROM vehicle WHERE license_number = '" + vehicle_id +  "';";
     	try {

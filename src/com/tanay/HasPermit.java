@@ -39,6 +39,65 @@ public class HasPermit {
         }
     }
 	
+	protected String status(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id+ "' AND phone_number = '" + this.phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return result.getString("status");
+    		} 
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return "V";
+    }
+	
+	protected String noOfPermits(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id+ "' AND phone_number = '" + this.phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return result.getString("no_of_permits");
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return "0";
+    }
+	
+	protected int noOfSpecialPermit(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM haspermit WHERE univ_id = '" + this.univ_id + "' AND phone_number = '" + this.phone_number + "' AND special_event='1';";
+    	int count = 0;
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			do {
+    				count += 1;
+    			}while(result.next());
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return count;
+    }
+	
+	protected void updateDriver(Statement statement, int no_of_permits) {
+		ResultSet result = null;
+		no_of_permits += 1;
+    	String query = "UPDATE driver SET no_of_permits=" + no_of_permits + " WHERE univ_id = '" + this.univ_id + "' AND phone_number = '" + this.phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		System.out.println("Updated no of permits in Driver");
+    	} catch (SQLException e) {
+            e.printStackTrace();
+            Main.close();
+        }
+	}
+	
+	
 	protected boolean containsDriver(Statement statement) {
     	ResultSet result = null;
     	String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id+ "' AND phone_number = '" + this.phone_number + "';";

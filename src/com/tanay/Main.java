@@ -80,14 +80,14 @@ public class Main {
 //        permitDAO.menuPermit(statement, connection);
         
      // HasPermit Queries
-   	HasPermitDAO hasPermitDAO = new HasPermitDAO();
+//   	HasPermitDAO hasPermitDAO = new HasPermitDAO();
 //        hasPermitDAO.createHasPermit(statement, connection);
 //        hasPermitDAO.insertHasPermit(statement);
 //        hasPermitDAO.viewAllHasPermit(statement);
 //        hasPermitDAO.viewHasPermitByFilters(statement);
 //        hasPermitDAO.updateHasPermit(statement);
 //        hasPermitDAO.deleteHasPermitByFilters(statement);
-        hasPermitDAO.menuHasPermit(statement, connection);
+//        hasPermitDAO.menuHasPermit(statement, connection);
         
         close();
     }

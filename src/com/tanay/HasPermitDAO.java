@@ -74,6 +74,7 @@ public class HasPermitDAO {
 		
 		HasPermit hasPermit = new HasPermit(univ_id, phone_number, permit_id, special_event);
 		
+		
 		if (!hasPermit.containsPermit(statement)) {
         	System.out.println("Permit is not registered, Incorrect Permit Id!");
         	return;
@@ -88,6 +89,25 @@ public class HasPermitDAO {
         	System.out.println("Duplicate Primary key, Cannot insert this ROW.");
         	return;
         }
+		
+		char status = hasPermit.status(statement).charAt(0);
+		int no_of_permits_count = Integer.parseInt(hasPermit.noOfPermits(statement));
+		int special_event_count = hasPermit.noOfSpecialPermit(statement);
+		
+		if ( status == 'E' && (no_of_permits_count == 2 || special_event_count == 2)) {
+			System.out.println("Maximum permit limit reached for Employee i.e 2, Cannot add a Permit!");
+        	return;
+		}
+		
+		if (status == 'S' && (no_of_permits_count == 1 || special_event_count == 1)) {
+			System.out.println("Maximum permit limit reached for Student i.e 1 + 1, Cannot add a Permit!");
+        	return;
+		}
+		
+		if (status == 'V' && no_of_permits_count == 1) {
+			System.out.println("Maximum permit limit reached for Visitor i.e 1, Cannot add a Permit!");
+        	return;
+		}
 		
 		hasPermit.insert(statement);
 	}
