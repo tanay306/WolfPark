@@ -53,6 +53,70 @@ public class Vehicle {
         }
     }
 	
+	protected boolean containsDriver(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id+ "' AND phone_number = '" + this.phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected static boolean containsDriver(Statement statement, String univ_id, String phone_number) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + univ_id+ "' AND phone_number = '" + phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected boolean containsVehicle(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM vehicle WHERE license_number = '" + this.license_number +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected static boolean containsVehicle(Statement statement, String license_number) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM vehicle WHERE license_number = '" + license_number +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
 	// Insert one row in the Drivers Table
 	protected void insert(Statement statement) {
 		String query = "INSERT INTO vehicle VALUES ('" + this.license_number + "','" + this.color + "','" + this.model + "','" + this.manufacture_year + "','"

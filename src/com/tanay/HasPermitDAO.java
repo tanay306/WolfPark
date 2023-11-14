@@ -73,6 +73,22 @@ public class HasPermitDAO {
 		String special_event = sc.nextLine();
 		
 		HasPermit hasPermit = new HasPermit(univ_id, phone_number, permit_id, special_event);
+		
+		if (!hasPermit.containsPermit(statement)) {
+        	System.out.println("Permit is not registered, Incorrect Permit Id!");
+        	return;
+        }
+		
+		if (!hasPermit.containsDriver(statement)) {
+        	System.out.println("Driver is not registered, Incorrect University Id or Phone Number!");
+        	return;
+        }
+		
+		if (hasPermit.containsHasPermitAll(statement)) {
+        	System.out.println("Duplicate Primary key, Cannot insert this ROW.");
+        	return;
+        }
+		
 		hasPermit.insert(statement);
 	}
 	
@@ -216,11 +232,22 @@ public class HasPermitDAO {
 	        }
 			if(permit_id_new.length() > 0) {
 	        	setMap.put("permit_id", sqlHelper.singleQuotes(permit_id_new));
+	        	if (!HasPermit.containsPermit(statement, permit_id_new)) {
+	            	System.out.println("Permit is not registered, Incorrect Permit Id!");
+	            	return;
+	            }
 	        }
 			if(special_event_new.length() > 0) {
 	        	setMap.put("special_event", sqlHelper.singleQuotes(special_event_new));
 	        }
 	        
+			if(univ_id_new.length() > 0 && phone_number_new.length() > 0) {
+				if(!HasPermit.containsDriver(statement, univ_id_new, phone_number_new)) {
+	        		System.out.println("Driver is not registered, Incorrect University Id or Phone Number!");
+	            	return;
+	        	}
+			}
+			
 			querySet = sqlHelper.merger(setMap, ", ");
 			
 	        hasPermit.updateFiltered(statement, queryWhere, querySet);

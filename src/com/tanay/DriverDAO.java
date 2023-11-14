@@ -75,6 +75,11 @@ public class DriverDAO {
         int no_of_permits = Integer.parseInt(sc.nextLine());
         
         Driver driver= new Driver(univ_id, phone_number, name, status, no_of_permits);
+        if (driver.containsDriver(statement)) {
+        	System.out.println("Driver is already registered!");
+        	return;
+        }
+        
         driver.insert(statement);
 	}
 	

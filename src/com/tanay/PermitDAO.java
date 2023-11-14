@@ -81,6 +81,17 @@ public class PermitDAO {
 		String type = sc.nextLine();
 		
 		Permit permit = new Permit(permit_id, start_date, expiration_date, expiration_time, vehicle_id, type);
+		
+		if (permit.containsPermit(statement)) {
+        	System.out.println("Permit already present!");
+        	return;
+        }
+		
+		if (!permit.containsVehicle(statement)) {
+        	System.out.println("Vehicle license number is incorrect, Vehicle is not registered!");
+        	return;
+        }
+		
 		permit.insert(statement);
 	}
 	
@@ -260,6 +271,10 @@ public class PermitDAO {
 	        HashMap<String, String> setMap = new HashMap<String, String>();
 	        if(permit_id_new.length() > 0) {
 	        	setMap.put("permit_id", sqlHelper.singleQuotes(permit_id_new));
+	        	if (Permit.containsPermit(statement, permit_id_new)) {
+	            	System.out.println("Permit already present!");
+	            	return;
+	            }
 	        }
 	        if(start_date_new.length() > 0) {
 	        	setMap.put("start_date", sqlHelper.singleQuotes(start_date_new));
@@ -272,6 +287,10 @@ public class PermitDAO {
 	        }
 	        if(vehicle_id_new.length() > 0) {
 	        	setMap.put("vehicle_id", sqlHelper.singleQuotes(vehicle_id_new));
+	        	if (!Permit.containsVehicle(statement, vehicle_id_new)) {
+	            	System.out.println("Vehicle license number is incorrect, Vehicle is not registered!");
+	            	return;
+	            }
 	        }
 	        if(type_new.length() > 0) {
 	        	setMap.put("type", sqlHelper.singleQuotes(type_new));
@@ -337,7 +356,6 @@ public class PermitDAO {
 	        	whereMap.put("type", sqlHelper.singleQuotes(type));
 	        }
 	        
-	        Permit permit = new Permit(permit_id, start_date, expiration_date, expiration_time, vehicle_id, type);
 	        String query = "";
 	        
 	        query = sqlHelper.merger(whereMap);

@@ -42,8 +42,8 @@ public class Main {
 //        CitationDAO c = new CitationDAO();
 //        c.menuCategory(statement, connection);
         
-        ChecksDAO checks = new ChecksDAO();
-        checks.menuCategory(statement, connection);
+//        ChecksDAO checks = new ChecksDAO();
+//        checks.menuCategory(statement, connection);
 
         // Category
 //        CategoryDAO categoryDAO = new CategoryDAO();
@@ -87,7 +87,7 @@ public class Main {
 //        hasPermitDAO.viewHasPermitByFilters(statement);
 //        hasPermitDAO.updateHasPermit(statement);
 //        hasPermitDAO.deleteHasPermitByFilters(statement);
-       hasPermitDAO.menuHasPermit(statement, connection);
+        hasPermitDAO.menuHasPermit(statement, connection);
         
         close();
     }

@@ -39,6 +39,88 @@ public class HasPermit {
         }
     }
 	
+	protected boolean containsDriver(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id+ "' AND phone_number = '" + this.phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected static boolean containsDriver(Statement statement, String univ_id, String phone_number) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM driver WHERE univ_id = '" + univ_id + "' AND phone_number = '" + phone_number + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected boolean containsPermit(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM permit WHERE permit_id = '" + this.permit_id +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	protected static boolean containsPermit(Statement statement, String permit_id) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM permit WHERE permit_id = '" + permit_id +  "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+	}
+	
+	protected boolean containsHasPermitAll(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM haspermit WHERE univ_id = '" + this.univ_id + "' AND phone_number = '" + this.phone_number 
+    			+ "' AND permit_id = '" + this.permit_id +"';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
+	
 	protected void insert(Statement statement) {
         String query = "INSERT INTO haspermit VALUES ('" + this.univ_id + "','" + this.phone_number + "','" + this.permit_id + "','" 
         		+ this.special_event + "');";

@@ -87,6 +87,17 @@ public class VehicleDAO {
         String phone_number = sc.nextLine();
         
         Vehicle vehicle = new Vehicle(license_number, color, model, manufacture_year, is_handicapped, manufacturer, univ_id, phone_number);
+        
+        if (vehicle.containsVehicle(statement)) {
+        	System.out.println("Vehicle is already registered, Please try Again!");
+        	return;
+        }
+        
+        if (!vehicle.containsDriver(statement)) {
+        	System.out.println("Driver is not registered, Incorrect University Id or Phone Number!");
+        	return;
+        }
+        
         vehicle.insert(statement);
 	}
 	
@@ -327,6 +338,10 @@ public class VehicleDAO {
 	        HashMap<String, String> setMap = new HashMap<String, String>();
 	        if(license_number_new.length() > 0) {
 	        	setMap.put("license_number", sqlHelper.singleQuotes(license_number_new));
+	        	if(Vehicle.containsVehicle(statement, license_number_new)) {
+	        		System.out.println("Vehicle is already registered!");
+	            	return;
+	        	}
 	        }
 	        if(color_new.length() > 0) {
 	        	setMap.put("color", sqlHelper.singleQuotes(color_new));
@@ -346,6 +361,13 @@ public class VehicleDAO {
 			if(phone_number_new.length() > 0) {
 	        	setMap.put("phone_number", sqlHelper.singleQuotes(phone_number_new));
 	        }
+			
+			if(univ_id_new.length() > 0 && phone_number_new.length() > 0) {
+				if(!Vehicle.containsDriver(statement, univ_id_new, phone_number_new)) {
+	        		System.out.println("Driver is not registered, Incorrect University Id or Phone Number!");
+	            	return;
+	        	}
+			}
 
 	        querySet = sqlHelper.merger(setMap, ", ");
 	        
