@@ -78,6 +78,10 @@ public class CitationDAO {
         String zone_id = sc.nextLine();
         System.out.print("Enter Space Number (String): ");
         String space_number = sc.nextLine();
+		System.out.print("Enter License Number (String): ");
+		String license_number = sc.nextLine();
+		System.out.print("Enter Permit ID (String): ");
+		String permit_id = sc.nextLine();
 
         Citation citation = new Citation(citation_number, citation_date, citation_time, category, payment_status, lot_name, zone_id, space_number);
         if (citation.containsCitation(statement)) {
@@ -100,7 +104,17 @@ public class CitationDAO {
             System.out.println("Space not present!");
         	return;
         }
+        if (! citation.containsLicenseNumber(statement, license_number)) {
+			System.out.println("License Number not present!");
+			return;
+		}
+        if (! citation.containsPermitId(statement, permit_id)) {
+			System.out.println("Permit ID not present!");
+			return;
+		}
         citation.insert(statement);
+		Checks checks = new Checks(license_number, citation_number, permit_id);
+		checks.insert(statement);
 	}
 
     public void viewAllCitation(Statement statement) {
