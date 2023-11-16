@@ -256,9 +256,41 @@ public class AppealsDAO {
 			System.out.println("Citation not present!");
         	return;
 		}
+		String query1 = "Select * from citation where citation_number = '" + citation_number + "';";
+		String query2 = "select * from checks where citation_number =  '" + citation_number + "';";
 		String query = "Update citation set payment_status = 1 where citation_number = '" + citation_number + "';";
-		
+		ResultSet result = null;
+		ResultSet result2 = null;
+		String category = "";
+		String vehicle_id = "";
 		try {
+			result = statement.executeQuery(query1);
+			while (result.next()) {
+				category = result.getString("category");
+			}
+			result2 = statement.executeQuery(query2);
+			while(result2.next()) {
+				vehicle_id = result2.getString("license_number");
+			}
+			String query3 = "select * from category_fee where category = '" + category + "';";
+			ResultSet result3 = statement.executeQuery(query3);
+			String fee = "";
+			while (result3.next()) {
+				fee = result3.getString("fee");
+			}
+			String query4 = "select * from vehicle where license_number = '" + vehicle_id + "';";
+			ResultSet result4 = statement.executeQuery(query4);
+			String is_handicapped = "";
+			while (result4.next()) {
+				is_handicapped = result4.getString("is_handicapped");
+			}
+			int fees = 0;
+			if (Integer.valueOf(is_handicapped) == 1) {
+				fees = Integer.valueOf(fee) / 2;
+			} else {
+				fees = Integer.valueOf(fee);
+			}
+			System.out.println("Paid Fee of $" + fees);
             statement.executeUpdate(query);
             System.out.println("Completed: Citation Paid Query Update");
         } catch (SQLException e) {
