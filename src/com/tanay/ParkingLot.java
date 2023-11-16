@@ -32,6 +32,22 @@ public class ParkingLot {
         this.address = address;
     }
     
+    protected boolean containsParkingLot(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM parkinglot WHERE lot_name = '" + this.lot_name + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+    
     protected void create(Statement statement) {
         String query = "CREATE TABLE parkinglot("
         		+ "lot_name VARCHAR (50),"
