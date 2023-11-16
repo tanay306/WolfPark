@@ -39,7 +39,7 @@ public class Space {
     }
 	
 	protected static void create(Statement statement) {
-        String query = "CREATE TABLE space\r\n"
+        String query = "CREATE TABLE space"
         		+ "("
         		+ " lot_name VARCHAR (50),"
         		+ " zone_id VARCHAR (2) NOT NULL,"

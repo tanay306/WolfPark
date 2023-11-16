@@ -23,21 +23,25 @@ public class Main {
         // parkingLotDAO.menuParkingLot(statement, connection);
 
         // Zone Queries
-        // ZoneDAO zoneDAO = new ZoneDAO();
+//         ZoneDAO zoneDAO = new ZoneDAO();
         // zoneDAO.createZone(statement, connection);
         // zoneDAO.insertZone(statement);
         // zoneDAO.viewAllZone(statement);
         // zoneDAO.viewZoneByFilters(statement);
         // zoneDAO.updateParkingLot(statement);
         // zoneDAO.deleteZoneByFilters(statement);
-        // zoneDAO.menuZone(statement, connection);
+//         zoneDAO.menuZone(statement, connection);
 
         // Space Queries
         // SpaceDAO spaceDAO = new SpaceDAO();
         // spaceDAO.menuSpace(statement, connection);
+        
+        // Associated With
+        AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
+        associatedWithDAO.menuSpace(statement, connection);
 
-        CitationDAO c = new CitationDAO();
-        c.menuCategory(statement, connection);
+//        CitationDAO c = new CitationDAO();
+//        c.menuCategory(statement, connection);
 
         // ChecksDAO checks = new ChecksDAO();
         // checks.menuCategory(statement, connection);
@@ -93,7 +97,7 @@ public class Main {
         try {
             connectToDatabase();
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Unable to connect to the database\n" + e.getMessage());
         }
     }
 
