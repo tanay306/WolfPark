@@ -160,6 +160,11 @@ public class ParkingLotDAO {
 	        
 	        queryWhere = sqlHelper.merger(whereMap);
 	        
+	        if (!parkingLot.containsParkingLot(statement)) {
+	        	System.out.println("Parking Lot not present in the parkinglot table!");
+	        	return;
+	        }
+	        
 	        HashMap<String, String> setMap = new HashMap<String, String>();
 	        if(lot_name_new.length() > 0) {
 	        	setMap.put("lot_name", sqlHelper.singleQuotes(lot_name_new));
@@ -167,7 +172,7 @@ public class ParkingLotDAO {
 	        if(address_new.length() > 0) {
 	        	setMap.put("address", sqlHelper.singleQuotes(address_new));
 	        }
-	        querySet = sqlHelper.merger(setMap);
+	        querySet = sqlHelper.mergerUpdate(setMap);
 
 	        parkingLot.viewUpdateFiltered(statement, queryWhere, querySet);
         }
