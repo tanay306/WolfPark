@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class AssociatedWithDAO {
 	Scanner sc = new Scanner(System.in);
 
-	public void menuSpace(Statement statement, Connection connection) {
+	public void menuAssociatedWith(Statement statement, Connection connection) {
 		System.out.print("\nAssociatedWith Sub-Menu\n"
 				+ "a. Create AssociatedWith\n"
 				+ "b. Insert AssociatedWith\n"

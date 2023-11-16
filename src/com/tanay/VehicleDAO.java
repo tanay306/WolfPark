@@ -48,7 +48,7 @@ public class VehicleDAO {
 				break;
 			default:
 				System.out.println("Invalid Entry");
-				this.menuVehicle(statement, connection);
+				break;
 		}
 	}
 	
