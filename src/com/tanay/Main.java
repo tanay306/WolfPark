@@ -41,41 +41,51 @@ public class Main {
                 case "1":
                     DriverDAO driverDAO = new DriverDAO();
                     driverDAO.menuDriver(statement, connection);
+                    break;
                 case "2":
                     VehicleDAO vehicleDAO = new VehicleDAO();
                     vehicleDAO.menuVehicle(statement, connection);
+                    break;
                 case "3":
                     PermitDAO permitDAO = new PermitDAO();
                     permitDAO.menuPermit(statement, connection);
+                    break;
                 case "4":
                     HasPermitDAO hasPermitDAO = new HasPermitDAO();
                     hasPermitDAO.menuHasPermit(statement, connection);
+                    break;
                 case "5":
                     ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
                     parkingLotDAO.menuParkingLot(statement, connection);
+                    break;
                 case "6":
                     ZoneDAO zoneDAO = new ZoneDAO();
                     zoneDAO.menuZone(statement, connection);
+                    break;
                 case "7":
                     SpaceDAO spaceDAO = new SpaceDAO();
                     spaceDAO.menuSpace(statement, connection);
+                    break;
                 case "8":
 //                    AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
 //                    associatedWithDAO.menuAssociated(statement, connection);
                 case "9":
                     CitationDAO citationDAO = new CitationDAO();
                     citationDAO.menuCategory(statement, connection);
+                    break;
                 case "10":
                     ChecksDAO checksDAO = new ChecksDAO();
                     checksDAO.menuCategory(statement, connection);
+                    break;
                 case "11":
                     AppealsDAO appealsDAO = new AppealsDAO();
                     appealsDAO.menuCategory(statement, connection);
-                case "-1":
                     break;
+                case "-1":
+                    return;
                 default:
                     System.out.println("Invalid Choice");
-                    continue;
+                    break;
             }
         }
     }
@@ -86,6 +96,7 @@ public class Main {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println("Connected to database!");
     }
 
     private static void connectToDatabase() throws ClassNotFoundException, SQLException {
@@ -120,5 +131,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        System.out.println("Disconnected to database!");
     }
 }
