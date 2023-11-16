@@ -49,6 +49,22 @@ public class Category {
         }
     	return true;
     }
+
+    protected boolean containsCategory(Statement statement, String category) {
+        ResultSet result = null;
+        String query = "Select * from category_fee where category = '" + category + "';";
+        try {
+            result = statement.executeQuery(query);
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
     
     protected void create(Statement statement) {
     	String query = "CREATE TABLE category_fee ( category VARCHAR(50), fee INT NOT NULL, PRIMARY KEY (category) );";
@@ -61,7 +77,7 @@ public class Category {
     }
 
     protected void insert(Statement statement) {
-    	String query = "INSERT INTO category_fee VALUES ('" + this.category + "','" + Integer.valueOf(this.fee) + "');";
+    	String query = "INSERT INTO category_fee VALUES ('" + this.category + "','" + this.fee + "');";
         try {
             statement.executeUpdate(query);
             System.out.println("Completed: Category Fee Query Insert");
@@ -87,7 +103,7 @@ public class Category {
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
-            System.out.println("Completed: Category_Fee Query Select with Where");
+            System.out.println("Completed: Category Fee Query Select with Where");
         } catch (SQLException e) {
             e.printStackTrace();
         }
