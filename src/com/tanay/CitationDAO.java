@@ -462,13 +462,12 @@ public class CitationDAO {
 			System.out.println("Expired Permits");
 			return;
 		}
-		if (!vehicle.equals(vehicle_id)) {
-			System.out.println("Invalid Permit");
+		if (Permit.containsVehicle(statement, vehicle)) {
+			System.out.println("No Permit");
 			return;
 		}
-		Vehicle vehicle1 = new Vehicle();
-		if (!vehicle1.containsVehicle(statement, vehicle)) {
-			System.out.println("No Permit");
+		if (!vehicle.equals(vehicle_id)) {
+			System.out.println("Invalid Permit");
 			return;
 		}
 	}
