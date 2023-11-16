@@ -84,6 +84,7 @@ public class CitationDAO {
 		String permit_id = sc.nextLine();
 
         Citation citation = new Citation(citation_number, citation_date, citation_time, category, payment_status, lot_name, zone_id, space_number);
+        System.out.println(category + !category.equals("No Permit"));
         if (citation.containsCitation(statement)) {
         	System.out.println("Citation already present!");
         	return;
@@ -104,12 +105,8 @@ public class CitationDAO {
             System.out.println("Space not present!");
         	return;
         }
-        if (citation.category != "No Permit" && ! citation.containsLicenseNumber(statement, license_number)) {
+        if (!category.equals("No Permit") && ! citation.containsLicenseNumber(statement, license_number)) {
 			System.out.println("License Number not present!");
-			return;
-		}
-        if (! citation.containsPermitId(statement, permit_id)) {
-			System.out.println("Permit ID not present!");
 			return;
 		}
         citation.insert(statement);
