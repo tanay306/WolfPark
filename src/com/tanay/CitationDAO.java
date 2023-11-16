@@ -104,7 +104,7 @@ public class CitationDAO {
             System.out.println("Space not present!");
         	return;
         }
-        if (! citation.containsLicenseNumber(statement, license_number)) {
+        if (citation.category != "No Permit" && ! citation.containsLicenseNumber(statement, license_number)) {
 			System.out.println("License Number not present!");
 			return;
 		}

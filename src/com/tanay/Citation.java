@@ -305,7 +305,7 @@ public class Citation {
 		}
 
 		protected void create(Statement statement) {
-			String query = "CREATE TABLE citation ( citation_number INT, citation_date DATE NOT NULL, citation_time TIME NOT NULL, category VARCHAR(50) NOT NULL, payment_status BOOL NOT NULL DEFAULT false, lot_name VARCHAR(50), zone_id VARCHAR(2), space_number INT, FOREIGN KEY(category) REFERENCES category_fee(category) ON UPDATE CASCADE, PRIMARY KEY (citation_number) );";
+			String query = "CREATE TABLE citation ( citation_number VARCHAR(10), citation_date DATE NOT NULL, citation_time TIME NOT NULL, category VARCHAR(50) NOT NULL, payment_status BOOL NOT NULL DEFAULT false, lot_name VARCHAR(50), zone_id VARCHAR(2), space_number INT, FOREIGN KEY(category) REFERENCES category_fee(category) ON UPDATE CASCADE, PRIMARY KEY (citation_number) );";
 			try {
 				statement.executeQuery(query);
 				System.out.println("Completed: Citation Query Create");

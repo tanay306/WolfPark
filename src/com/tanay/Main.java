@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/tgandhi";
+    static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/snisar";
 
     private static Connection connection = null;
     private static Statement statement = null;
@@ -111,8 +111,10 @@ public class Main {
     private static void connectToDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("org.mariadb.jdbc.Driver");
 
-        String user = "tgandhi";
-        String password = "200533319";
+//        String user = "tgandhi";
+//        String password = "200533319";
+        String user = "snisar";
+        String password = "dr.rada_dbms";
 
         connection = DriverManager.getConnection(jdbcURL, user, password);
         statement = connection.createStatement();
