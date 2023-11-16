@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class CitationDAO {
 
@@ -19,6 +21,7 @@ public class CitationDAO {
 				+ "d. View Specific Citation\n"
 				+ "e. Update Citation\n"
 				+ "f. Delete Citation\n"
+				+ "g. Check Valid Citation\n"
 				+ "Select one option: ");
 		
 		CitationDAO citationDAO = new CitationDAO();
@@ -46,6 +49,9 @@ public class CitationDAO {
 				break;
 			case "f":
 				 citationDAO.deleteCitationByFilters(statement);
+				break;
+			case "g":
+				citationDAO.checkValid(statement);
 				break;
 			default:
 				System.out.println("Invalid Entry");
@@ -415,6 +421,58 @@ public class CitationDAO {
 	        query = sqlHelper.merger(whereMap);
 	        citation.deleteFiltered(statement, query);
         }
+	}
+
+	public void checkValid(Statement statement) {
+		System.out.print("Enter Permit ID (String): ");
+		String permit_id = sc.nextLine();
+		System.out.print("Enter Vehicle ID (String): ");
+		String vehicle_id = sc.nextLine();
+		String query = "select expiration_date, expiration_time, vehicle_id from permit where permit_id = '" + permit_id + "';";
+		ResultSet result = null;
+		String expiration_date = "";
+		String expiration_time = "";
+		String vehicle = "";
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		String now_date = dtf.format(now);
+		String now_time = dtf1.format(now);
+		try {
+			result = statement.executeQuery(query);
+			while (result.next()) {
+				expiration_date = result.getString("expiration_date");
+				expiration_time = result.getString("expiration_time");
+				vehicle = result.getString("vehicle_id");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (
+				(Integer.valueOf(expiration_date.substring(0,4)) - Integer.valueOf(now_date.substring(0,4)) > 0)
+						|| ((Integer.valueOf(expiration_date.substring(0,4)) -Integer.valueOf(now_date.substring(0,4)) == 0 ) && (Integer.valueOf(expiration_date.substring(5,7)) - Integer.valueOf(now_date.substring(5,7)) > 0))
+						|| ((Integer.valueOf(expiration_date.substring(0,4)) -Integer.valueOf(now_date.substring(0,4)) == 0 ) && (Integer.valueOf(expiration_date.substring(5,7)) - Integer.valueOf(now_date.substring(5,7)) == 0)  && (Integer.valueOf(expiration_date.substring(8,10)) - Integer.valueOf(now_date.substring(8,10)) > 0))
+		) {
+			System.out.println(expiration_date + "//" + now_date);
+			System.out.println("Expired Permitsss");
+			return;
+		} else if (expiration_date.equals(now_date)) {
+			if (Integer.valueOf(expiration_time.substring(0,2)) > Integer.valueOf(now_time.substring(0,2)) ||
+					Integer.valueOf(expiration_time.substring(0,2)) == Integer.valueOf(now_time.substring(0,2)) && Integer.valueOf(expiration_time.substring(3,5)) > Integer.valueOf(now_time.substring(3,5))) {
+				System.out.println("Expired Permit");
+				return;
+			}
+		}
+		if (!vehicle.equals(vehicle_id)) {
+			System.out.println("Invalid Permit");
+			return;
+		}
+		Vehicle vehicle1 = new Vehicle();
+		if (!vehicle1.containsVehicle(statement, vehicle)) {
+			System.out.println("No Permit");
+			return;
+		}
 	}
 
 }

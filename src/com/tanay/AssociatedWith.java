@@ -81,8 +81,8 @@ public class AssociatedWith {
 	protected static void create(Statement statement) {
 		String query = "CREATE TABLE associatedwith"
 				+ "("
-				+ " permit_id INT UNIQUE,"
-				+ " space_number INT,"
+				+ " permit_id varchar(10) UNIQUE,"
+				+ " space_number INT(11),"
 				+ " zone_id VARCHAR (2),"
 				+ " lot_name VARCHAR (50),"
 				+ " PRIMARY KEY (permit_id, space_number, zone_id, lot_name),"
