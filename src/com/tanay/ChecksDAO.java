@@ -54,6 +54,7 @@ public class ChecksDAO {
 
     public void createChecks(Statement statement, Connection connection) throws SQLException {
 		if(SQLHelper.tableExists(connection, "checks")) {
+			System.out.println("lll");
 			System.out.println("Table Already Exists");
 		} else {
 			Checks checks = new Checks();

@@ -110,7 +110,7 @@ public class CitationDAO {
 			return;
 		}
         citation.insert(statement);
-		Checks checks = new Checks(license_number, citation_number, permit_id);
+		Checks checks = new Checks(license_number, permit_id, citation_number);
 		checks.insert(statement);
 	}
 

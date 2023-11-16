@@ -162,7 +162,7 @@ public class Checks {
     }
 
     protected void create(Statement statement) {
-    	String query = "CREATE TABLE checks ( license_number VARCHAR(8), citation_number INT, permit_id INT, PRIMARY KEY (license_number, citation_number, permit_id), FOREIGN KEY(license_number) REFERENCES vehicle(license_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(citation_number) REFERENCES citation(citation_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(permit_id) REFERENCES permit(permit_id) ON UPDATE CASCADE ON DELETE CASCADE );";
+    	String query = "CREATE TABLE checks ( license_number VARCHAR(8), citation_number varchar(10), permit_id varchar(10), PRIMARY KEY (license_number, citation_number, permit_id), FOREIGN KEY(license_number) REFERENCES vehicle(license_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(citation_number) REFERENCES citation(citation_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(permit_id) REFERENCES permit(permit_id) ON UPDATE CASCADE ON DELETE CASCADE );";
     	try {
             statement.executeQuery(query);
             System.out.println("Completed: Checks Table Create");
@@ -173,9 +173,9 @@ public class Checks {
 
     protected void insert(Statement statement) {
     	String query;
-    	if (this.citation_number == "") {
+    	if (this.citation_number.length() == 0) {
     		query = "INSERT INTO checks VALUES ('" + this.license_number + "',null,'" + this.permit_id + "');";
-    	} else if (this.license_number == "") {
+    	} else if (this.license_number.length() == 0) {
     		query = "INSERT INTO checks VALUES (null,'" + this.citation_number + "','" + this.permit_id + "');";
     	}
     	else {
