@@ -211,7 +211,7 @@ public class VehicleDAO {
 	        			System.out.println("[(" + result.getString("license_number") + "), (" + result.getString("color") + "), (" 
 	        		+ result.getString("model") + "), (" + result.getString("manufacture_year") + "), (" + result.getString("is_handicapped") + "), (" 
 	        		+ result.getString("manufacturer") + "), (" + result.getString("univ_id") + "), (" + result.getString("phone_number") + ")]\n");
-	        		}while (result.next());
+	        		} while (result.next());
 	        	} else {
 	        		System.out.println("*** No Rows returned ***");
 	        	}

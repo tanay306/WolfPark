@@ -133,12 +133,15 @@ public class PermitDAO {
 				
 		
 		try {
+			//********* Starting Transaction **************
 			connection.setAutoCommit(false);
 
 		   //1 or more queries or updates
 			permit.insert(statement);
 			hasPermit.insert(statement);
-			if(status == 'V') {
+			if(Integer.parseInt(univ_id) == -1) {
+				System.out.println("Unknown Driver Detected....");
+			} else if(status == 'V') {
 				hasPermit.updateDriver(statement, 0, true);
 			} else if(special_event == '0') {
 				hasPermit.updateDriver(statement, no_of_permits_count, true);
@@ -147,11 +150,13 @@ public class PermitDAO {
 //			if(Integer.parseInt(univ_id) == -1) {
 //				throw new SQLException("Checking Transaction");				
 //			}
+			//********* Commiting Transaction **************
 			connection.commit();
 			System.out.println("Success");
 		} catch(SQLException e) {
 			if(connection != null) {
 				try {
+					//********* Rollback Transaction **************
 					connection.rollback();
 					System.out.println("Rolling back...");
 					connection.setAutoCommit(true);
