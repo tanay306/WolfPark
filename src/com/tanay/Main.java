@@ -29,10 +29,11 @@ public class Main {
                     + "6. Zones\n"
                     + "7. Space\n"
                     + "8. Associated With\n"
-                    + "9. Citation\n"
-                    + "10. Check\n"
-                    + "11. Appeal/Pay\n"
-                    + "12. Results\n"
+                    + "9. Category\n"
+                    + "10. Citation\n"
+                    + "11. Check\n"
+                    + "12. Appeal/Pay\n"
+                    + "13. Results\n"
                     + "-1. End\n"
                     + "\nSelect one option: ");
             String input = sc.nextLine();
@@ -66,21 +67,26 @@ public class Main {
                     spaceDAO.menuSpace(statement, connection);
                     break;
                 case "8":
-                     AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
-                     associatedWithDAO.menuAssociatedWith(statement, connection);
+                    AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
+                    associatedWithDAO.menuAssociatedWith(statement, connection);
+                    break;
                 case "9":
+                    CategoryDAO categoryDAO = new CategoryDAO();
+                    categoryDAO.menuCategory(statement, connection);
+                    break;    
+                case "10":
                     CitationDAO citationDAO = new CitationDAO();
                     citationDAO.menuCategory(statement, connection);
                     break;
-                case "10":
+                case "11":
                     ChecksDAO checksDAO = new ChecksDAO();
                     checksDAO.menuCategory(statement, connection);
                     break;
-                case "11":
+                case "12":
                     AppealsDAO appealsDAO = new AppealsDAO();
                     appealsDAO.menuCategory(statement, connection);
                     break;
-                case "12":
+                case "13":
                 	Reports report = new Reports();
                 	report.menuCategory(statement, connection);
                 	break;
