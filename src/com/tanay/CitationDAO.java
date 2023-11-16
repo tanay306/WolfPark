@@ -36,7 +36,7 @@ public class CitationDAO {
 				}
 				break;
 			case "b": 
-				citationDAO.insertCitation(statement);
+				citationDAO.insertCitation(statement, connection);
 				break;
 			case "c":
 				citationDAO.viewAllCitation(statement);
@@ -67,8 +67,8 @@ public class CitationDAO {
 		}
 	}
 
-    public void insertCitation(Statement statement) {
-		System.out.print("Enter Citation Number (Int): ");
+    public void insertCitation(Statement statement, Connection connection) {
+		System.out.print("Enter Citation Number (String): ");
 		String citation_number = sc.nextLine();
 		System.out.print("Enter Citation Date (Date): ");
         String citation_date = sc.nextLine();
@@ -115,13 +115,40 @@ public class CitationDAO {
 //			System.out.println("License Number not present!");
 //			return;
 //		}
-        citation.insert(statement);
-		Checks checks = new Checks(license_number, permit_id, citation_number);
-		if (!citation.containsLicenseNumber(statement, license_number)) {
-			Vehicle v = new Vehicle(license_number, "unknown", "unknown", "0000-00-00", 0, "null", "-1", "-1");
-			v.insert(statement);
+        
+        Checks checks = new Checks(license_number, permit_id, citation_number);
+        
+        try {
+			//********* Starting Transaction **************
+			connection.setAutoCommit(false);
+
+		   //1 or more queries or updates
+			citation.insert(statement);
+			if (!citation.containsLicenseNumber(statement, license_number)) {
+				Vehicle v = new Vehicle(license_number, "unknown", "unknown", "0000-00-00", 0, "null", "-1", "-1");
+				v.insert(statement);
+			}
+			checks.insert(statement);
+			// Code to test Transactions.
+//			if(citation_number.length() > 0) {
+//				throw new SQLException("Checking Transaction");				
+//			}
+			//********* Commiting Transaction **************
+			connection.commit();
+			System.out.println("Success");
+		} catch(SQLException e) {
+			if(connection != null) {
+				try {
+					//********* Rollback Transaction **************
+					connection.rollback();
+					System.out.println("Rolling back...");
+					connection.setAutoCommit(true);
+				} catch(SQLException e1) {
+					e.printStackTrace();
+				}
+				
+			}
 		}
-		checks.insert(statement);
 	}
 
     public void viewAllCitation(Statement statement) {
@@ -139,7 +166,7 @@ public class CitationDAO {
 
     public void viewCitationByFilters(Statement statement) {
 		SQLHelper.skipper();
-		System.out.print("Enter Citation Number (Int): ");
+		System.out.print("Enter Citation Number (String): ");
 		String citation_number = sc.nextLine();
         SQLHelper.skipper();
 		System.out.print("Enter Citation Date (Date): ");
@@ -215,10 +242,10 @@ public class CitationDAO {
 
     public void updateCitation(Statement statement) {
 		SQLHelper.skipper();
-		System.out.print("Enter Citation Number (Int): ");
+		System.out.print("Enter Citation Number (String): ");
 		String citation_number = sc.nextLine();
         SQLHelper.skipper();
-		System.out.print("Enter New Citation Number (Int): ");
+		System.out.print("Enter New Citation Number (String): ");
 		String citation_number_new = sc.nextLine();
         SQLHelper.skipper();
 		System.out.print("Enter Citation Date (Date): ");
@@ -361,7 +388,7 @@ public class CitationDAO {
 
     public void deleteCitationByFilters(Statement statement) {
 		SQLHelper.skipper();
-		System.out.print("Enter Citation Number (Int): ");
+		System.out.print("Enter Citation Number (String): ");
 		String citation_number = sc.nextLine();
         SQLHelper.skipper();
 		System.out.print("Enter Citation Date (Date): ");
