@@ -56,8 +56,8 @@ public class ChecksDAO {
 		if(SQLHelper.tableExists(connection, "checks")) {
 			System.out.println("Table Already Exists");
 		} else {
-			Category category = new Category();
-			category.create(statement);
+			Checks checks = new Checks();
+			checks.create(statement);
 		}
 	}
 
