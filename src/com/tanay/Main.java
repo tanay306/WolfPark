@@ -34,6 +34,7 @@ public class Main {
                     + "9. Citation\n"
                     + "10. Check\n"
                     + "11. Appeal/Pay\n"
+                    + "12. Results\n"
                     + "-1. End\n"
                     + "\nSelect one option: ");
             String input = sc.nextLine();
@@ -81,6 +82,10 @@ public class Main {
                     AppealsDAO appealsDAO = new AppealsDAO();
                     appealsDAO.menuCategory(statement, connection);
                     break;
+                case "12":
+                	Reports report = new Reports();
+                	report.menuCategory(statement, connection);
+                	break;
                 case "-1":
                     return;
                 default:
