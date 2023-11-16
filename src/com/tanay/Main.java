@@ -1,6 +1,7 @@
 package com.tanay;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -9,87 +10,74 @@ public class Main {
     private static Connection connection = null;
     private static Statement statement = null;
     private static ResultSet result = null;
+    private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws SQLException {
         initialize();
-        // Parking lot Queries
-        // ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
-        // parkingLotDAO.createParkingLot(statement, connection);
-        // parkingLotDAO.viewParkingLotByFilters(statement);
-        // parkingLotDAO.updateParkingLot(statement);
-        // parkingLotDAO.viewAllParkingLot(statement);
-        // parkingLotDAO.deleteParkingLotByFilters(statement);
-        // parkingLotDAO.viewAllParkingLot(statement);
-        // parkingLotDAO.menuParkingLot(statement, connection);
 
-        // Zone Queries
-        // ZoneDAO zoneDAO = new ZoneDAO();
-        // zoneDAO.createZone(statement, connection);
-        // zoneDAO.insertZone(statement);
-        // zoneDAO.viewAllZone(statement);
-        // zoneDAO.viewZoneByFilters(statement);
-        // zoneDAO.updateParkingLot(statement);
-        // zoneDAO.deleteZoneByFilters(statement);
-        // zoneDAO.menuZone(statement, connection);
-
-        // Space Queries
-//        SpaceDAO spaceDAO = new SpaceDAO();
-//        spaceDAO.menuSpace(statement, connection);
-        
-//        CitationDAO c = new CitationDAO();
-//        c.menuCategory(statement, connection);
-        
-        AppealsDAO a = new AppealsDAO();
-        a.menuCategory(statement, connection);
-        
-//        ChecksDAO checks = new ChecksDAO();
-//        checks.menuCategory(statement, connection);
-
-        // Category
-        // CategoryDAO categoryDAO = new CategoryDAO();
-        // categoryDAO.menuCategory(statement, connection);
-
-        // Driver Queries
-        // DriverDAO driverDAO = new DriverDAO();
-        // driverDAO.createDriver(statement, connection);
-        // driverDAO.insertDriver(statement);
-        // driverDAO.viewAllDriver(statement);
-        // driverDAO.viewDriverByFilters(statement);
-        // driverDAO.updateDriver(statement);
-        // driverDAO.deleteDriverByFilters(statement);
-        // driverDAO.menuDriver(statement, connection);
-
-        // Vehicle Queries
-        // VehicleDAO vehicleDAO = new VehicleDAO();
-        // vehicleDAO.createVehicle(statement, connection);
-        // vehicleDAO.insertVehicle(statement);
-        // vehicleDAO.viewAllVehicle(statement);
-        // vehicleDAO.viewVehicleByFilters(statement);
-        // vehicleDAO.updateVehicle(statement);
-        // vehicleDAO.deleteVehicleByFilters(statement);
-        // vehicleDAO.menuVehicle(statement, connection);
-
-        // Permit Queries
-        // PermitDAO permitDAO = new PermitDAO();
-        // permitDAO.createPermit(statement, connection);
-        // permitDAO.insertPermit(statement);
-        // permitDAO.viewAllPermit(statement);
-        // permitDAO.viewPermitByFilters(statement);
-        // permitDAO.updatePermit(statement);
-        // permitDAO.deletePermitByFilters(statement);
-        // permitDAO.menuPermit(statement, connection);
-
-        // HasPermit Queries
-        // HasPermitDAO hasPermitDAO = new HasPermitDAO();
-        // hasPermitDAO.createHasPermit(statement, connection);
-        // hasPermitDAO.insertHasPermit(statement);
-        // hasPermitDAO.viewAllHasPermit(statement);
-        // hasPermitDAO.viewHasPermitByFilters(statement);
-        // hasPermitDAO.updateHasPermit(statement);
-        // hasPermitDAO.deleteHasPermitByFilters(statement);
-        // hasPermitDAO.menuHasPermit(statement, connection);
+        menu();
 
         close();
+    }
+
+    private static void menu() {
+        while(true) {
+            System.out.print("\nMenu\n"
+                    + "1. Driver\n"
+                    + "2. Vehicle\n"
+                    + "3. Permit\n"
+                    + "4. Has Permit\n"
+                    + "5. Parking Lot\n"
+                    + "6. Zones\n"
+                    + "7. Space\n"
+                    + "8. Associated With\n"
+                    + "9. Citation\n"
+                    + "10. Check\n"
+                    + "11. Appeal/Pay\n"
+                    + "-1. End\n"
+                    + "\nSelect one option: ");
+            String input = sc.nextLine();
+            switch(input) {
+                case "1":
+                    DriverDAO driverDAO = new DriverDAO();
+                    driverDAO.menuDriver(statement, connection);
+                case "2":
+                    VehicleDAO vehicleDAO = new VehicleDAO();
+                    vehicleDAO.menuVehicle(statement, connection);
+                case "3":
+                    PermitDAO permitDAO = new PermitDAO();
+                    permitDAO.menuPermit(statement, connection);
+                case "4":
+                    HasPermitDAO hasPermitDAO = new HasPermitDAO();
+                    hasPermitDAO.menuHasPermit(statement, connection);
+                case "5":
+                    ParkingLotDAO parkingLotDAO = new ParkingLotDAO();
+                    parkingLotDAO.menuParkingLot(statement, connection);
+                case "6":
+                    ZoneDAO zoneDAO = new ZoneDAO();
+                    zoneDAO.menuZone(statement, connection);
+                case "7":
+                    SpaceDAO spaceDAO = new SpaceDAO();
+                    spaceDAO.menuSpace(statement, connection);
+                case "8":
+//                    AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
+//                    associatedWithDAO.menuAssociated(statement, connection);
+                case "9":
+                    CitationDAO citationDAO = new CitationDAO();
+                    citationDAO.menuCategory(statement, connection);
+                case "10":
+                    ChecksDAO checksDAO = new ChecksDAO();
+                    checksDAO.menuCategory(statement, connection);
+                case "11":
+                    AppealsDAO appealsDAO = new AppealsDAO();
+                    appealsDAO.menuCategory(statement, connection);
+                case "-1":
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    continue;
+            }
+        }
     }
 
     private static void initialize() {
