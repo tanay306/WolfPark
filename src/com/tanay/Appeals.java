@@ -125,7 +125,7 @@ public class Appeals {
     }
 
     protected void create(Statement statement) {
-        String query = "CREATE TABLE appeals ( univ_id CHAR(9), phone_number CHAR(10), citation_number INT, PRIMARY KEY (univ_id, phone_number, citation_number), FOREIGN KEY (univ_id, phone_number) REFERENCES driver (univ_id, phone_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY (citation_number) REFERENCES citation (citation_number) ON UPDATE CASCADE ON DELETE CASCADE );";
+        String query = "CREATE TABLE appeals ( univ_id CHAR(9), phone_number CHAR(10), citation_number VARCHAR(10), PRIMARY KEY (univ_id, phone_number, citation_number), FOREIGN KEY (univ_id, phone_number) REFERENCES driver (univ_id, phone_number) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY (citation_number) REFERENCES citation (citation_number) ON UPDATE CASCADE ON DELETE CASCADE );";
         try {
             statement.executeQuery(query);
             System.out.println("Completed: Appeals Query Create");
