@@ -74,7 +74,7 @@ public class Reports {
     }
 
     public void returnList(Statement statement) {
-        String query = "select lot_name, zone_id from space;";
+        String query = "select * from zone;";
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
@@ -87,7 +87,7 @@ public class Reports {
     }
 
     public void carsInViolation(Statement statement) {
-        String query = "select count(*) as total from checks where citation_number is not null;";
+        String query = "select count(*) as total from citation where payment_status=0;";
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
