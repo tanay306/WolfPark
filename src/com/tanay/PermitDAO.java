@@ -32,7 +32,7 @@ public class PermitDAO {
 				}
 				break;
 			case "b": 
-				permitDAO.insertPermit(statement);
+				permitDAO.insertPermit(statement, connection);
 				break;
 			case "c":
 				permitDAO.viewAllPermit(statement);
@@ -59,7 +59,7 @@ public class PermitDAO {
 		}
 	}
 	
-	public void insertPermit(Statement statement) {
+	public void insertPermit(Statement statement, Connection connection) {
 		
 		System.out.print("Enter Permit Id (String): ");
 		String permit_id = sc.nextLine();
@@ -130,14 +130,37 @@ public class PermitDAO {
 			System.out.println("Maximum permit limit reached for Visitor i.e 1, Cannot add a Permit!");
         	return;
 		}
+				
 		
-		permit.insert(statement);
-		hasPermit.insert(statement);
-		if(status == 'V') {
-			hasPermit.updateDriver(statement, 0, true);
-		} else if(special_event == '0') {
-			hasPermit.updateDriver(statement, no_of_permits_count, true);
-		}		
+		try {
+			connection.setAutoCommit(false);
+
+		   //1 or more queries or updates
+			permit.insert(statement);
+			hasPermit.insert(statement);
+			if(status == 'V') {
+				hasPermit.updateDriver(statement, 0, true);
+			} else if(special_event == '0') {
+				hasPermit.updateDriver(statement, no_of_permits_count, true);
+			}
+			// Code to test Transactions.
+//			if(Integer.parseInt(univ_id) == -1) {
+//				throw new SQLException("Checking Transaction");				
+//			}
+			connection.commit();
+			System.out.println("Success");
+		} catch(SQLException e) {
+			if(connection != null) {
+				try {
+					connection.rollback();
+					System.out.println("Rolling back...");
+					connection.setAutoCommit(true);
+				} catch(SQLException e1) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
 	}
 	
 	public void viewAllPermit(Statement statement) {
