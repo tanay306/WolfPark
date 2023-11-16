@@ -21,6 +21,23 @@ public class Space {
 		this.availability_slot = availability_slot;
 	}
     
+    protected boolean containsSpace(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM space WHERE lot_name = '" + this.lot_name + "' AND zone_id = '" + this.zone_id + "' AND space_number = '" + this.space_number + "';";
+    	System.out.println(query);
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+    
     protected boolean containsZone(Statement statement) {
     	ResultSet result = null;
     	String query = "SELECT * FROM zone WHERE lot_name = '" + this.lot_name + "' AND zone_id = '" + this.zone_id +"';";
@@ -45,7 +62,7 @@ public class Space {
         		+ " zone_id VARCHAR (2) NOT NULL,"
         		+ " space_number INT,"
         		+ " type VARCHAR (20) DEFAULT 'regular' NOT NULL,"
-        		+ " availability_slot BOOL DEFAULT false NOT NULL,"
+        		+ " availability_slot BOOL DEFAULT true NOT NULL,"
         		+ " PRIMARY KEY (lot_name, zone_id, space_number),"
         		+ " FOREIGN KEY(lot_name, zone_id) REFERENCES zone(lot_name, zone_id)"
         		+ " ON UPDATE CASCADE ON DELETE CASCADE"

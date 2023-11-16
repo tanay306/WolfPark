@@ -67,6 +67,11 @@ public class ParkingLotDAO {
         String address = sc.nextLine();
         
         ParkingLot parkingLot = new ParkingLot(lot_name, address);
+        
+        if (parkingLot.containsParkingLot(statement)) {
+        	System.out.println("Parking Lot is already registered, Please try Again!");
+        	return;
+        }
         parkingLot.insert(statement);
 	}
 	

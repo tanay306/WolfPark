@@ -26,7 +26,7 @@ public class Permit {
 	protected static void create(Statement statement) {
         String query = "CREATE TABLE permit"
         		+ "("
-        		+ "permit_id INT,"
+        		+ "permit_id VARCHAR(10),"
         		+ "start_date DATE NOT NULL,"
         		+ "expiration_date DATE NOT NULL,"
         		+ "expiration_time TIME NOT NULL,"

@@ -24,7 +24,7 @@ public class HasPermit {
         		+ "("
         		+ "univ_id CHAR(9),"
         		+ "phone_number CHAR(10),"
-        		+ "permit_id INT,"
+        		+ "permit_id VARCHAR(10),"
         		+ "special_event BOOL NOT NULL DEFAULT false,"
         		+ "PRIMARY KEY (univ_id, phone_number, permit_id),"
         		+ "FOREIGN KEY(univ_id, phone_number) REFERENCES driver(univ_id, phone_number) ON UPDATE CASCADE ON DELETE CASCADE,"
@@ -84,9 +84,13 @@ public class HasPermit {
     	return count;
     }
 	
-	protected void updateDriver(Statement statement, int no_of_permits) {
+	protected void updateDriver(Statement statement, int no_of_permits, boolean inc) {
 		ResultSet result = null;
-		no_of_permits += 1;
+		if(inc) {
+			no_of_permits += 1;
+		} else {
+			no_of_permits -= 1;
+		}
     	String query = "UPDATE driver SET no_of_permits=" + no_of_permits + " WHERE univ_id = '" + this.univ_id + "' AND phone_number = '" + this.phone_number + "';";
     	try {
     		result = statement.executeQuery(query);

@@ -62,6 +62,7 @@ public class ParkingLot {
             Main.close();
         }
     }
+    
 
     protected void insert(Statement statement) {
         String query = "INSERT INTO parkinglot VALUES ('" + this.lot_name + "','" + this.address + "');";

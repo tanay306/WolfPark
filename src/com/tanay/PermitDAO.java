@@ -61,7 +61,7 @@ public class PermitDAO {
 	
 	public void insertPermit(Statement statement) {
 		
-		System.out.print("Enter Permit Id (Integer): ");
+		System.out.print("Enter Permit Id (String): ");
 		String permit_id = sc.nextLine();
 		
 		System.out.print("Enter Permit Start Date (Date in yyyy-mm-dd format): ");
@@ -134,9 +134,9 @@ public class PermitDAO {
 		permit.insert(statement);
 		hasPermit.insert(statement);
 		if(status == 'V') {
-			hasPermit.updateDriver(statement, 0);
+			hasPermit.updateDriver(statement, 0, true);
 		} else if(special_event == '0') {
-			hasPermit.updateDriver(statement, no_of_permits_count);
+			hasPermit.updateDriver(statement, no_of_permits_count, true);
 		}		
 	}
 	
@@ -156,7 +156,7 @@ public class PermitDAO {
 	
 	public void viewPermitByFilters(Statement statement) {
 		SQLHelper.skipper();
-		System.out.print("Enter Permit Id (Integer): ");
+		System.out.print("Enter Permit Id (String): ");
 		String permit_id = sc.nextLine();
 		
 		SQLHelper.skipper();
@@ -231,7 +231,7 @@ public class PermitDAO {
 	
 	public void updatePermit(Statement statement) {
 		SQLHelper.skipper();
-		System.out.print("Enter Permit Id (Integer): ");
+		System.out.print("Enter Permit Id (String): ");
 		String permit_id = sc.nextLine();
 		
 		SQLHelper.skipper();
@@ -357,7 +357,7 @@ public class PermitDAO {
 	
 	public void deletePermitByFilters(Statement statement) {
 		SQLHelper.skipper();
-		System.out.print("Enter Permit Id (Integer): ");
+		System.out.print("Enter Permit Id (String): ");
 		String permit_id = sc.nextLine();
 		
 		SQLHelper.skipper();

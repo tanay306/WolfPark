@@ -40,9 +40,9 @@ public class Vehicle {
         		+ "manufacturer VARCHAR(255) NOT NULL,"
         		+ "univ_id CHAR(9),"
         		+ "phone_number CHAR(10),"
-           		+ "PRIMARY KEY (license_number)"
         		+ "FOREIGN KEY(univ_id, phone_number) REFERENCES driver(univ_id, phone_number)"
         		+ " ON UPDATE CASCADE ON DELETE SET NULL,"
+        		+ "PRIMARY KEY (license_number)"
         		+ ");";
         try {
             statement.executeQuery(query);

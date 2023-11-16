@@ -75,7 +75,13 @@ public class VehicleDAO {
 		String manufacture_year = sc.nextLine();
 		
 		System.out.print("Enter 1 if you are Handicapped (Integer): ");
-		int is_handicapped = Integer.parseInt(sc.nextLine());
+		int is_handicapped;
+		String int_input = sc.nextLine();
+        if(int_input.isEmpty()) {
+        	is_handicapped = 0;
+        } else {
+        	is_handicapped = Integer.parseInt(int_input);      	
+        }
 		
 		System.out.print("Enter your Manufacturing Company (String): ");
 		String manufacturer = sc.nextLine();
