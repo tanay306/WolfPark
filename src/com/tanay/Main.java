@@ -14,14 +14,12 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         initialize();
-
         menu();
-
         close();
     }
 
     private static void menu() {
-        while(true) {
+        while (true) {
             System.out.print("\nMenu\n"
                     + "1. Driver\n"
                     + "2. Vehicle\n"
@@ -31,13 +29,15 @@ public class Main {
                     + "6. Zones\n"
                     + "7. Space\n"
                     + "8. Associated With\n"
-                    + "9. Citation\n"
-                    + "10. Check\n"
-                    + "11. Appeal/Pay\n"
+                    + "9. Category\n"
+                    + "10. Citation\n"
+                    + "11. Check\n"
+                    + "12. Appeal/Pay\n"
+                    + "13. Results\n"
                     + "-1. End\n"
                     + "\nSelect one option: ");
             String input = sc.nextLine();
-            switch(input) {
+            switch (input) {
                 case "1":
                     DriverDAO driverDAO = new DriverDAO();
                     driverDAO.menuDriver(statement, connection);
@@ -67,20 +67,29 @@ public class Main {
                     spaceDAO.menuSpace(statement, connection);
                     break;
                 case "8":
-//                    AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
-//                    associatedWithDAO.menuAssociated(statement, connection);
+                    AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
+                    associatedWithDAO.menuAssociatedWith(statement, connection);
+                    break;
                 case "9":
+                    CategoryDAO categoryDAO = new CategoryDAO();
+                    categoryDAO.menuCategory(statement, connection);
+                    break;    
+                case "10":
                     CitationDAO citationDAO = new CitationDAO();
                     citationDAO.menuCategory(statement, connection);
                     break;
-                case "10":
+                case "11":
                     ChecksDAO checksDAO = new ChecksDAO();
                     checksDAO.menuCategory(statement, connection);
                     break;
-                case "11":
+                case "12":
                     AppealsDAO appealsDAO = new AppealsDAO();
                     appealsDAO.menuCategory(statement, connection);
                     break;
+                case "13":
+                	Reports report = new Reports();
+                	report.menuCategory(statement, connection);
+                	break;
                 case "-1":
                     return;
                 default:
@@ -94,7 +103,7 @@ public class Main {
         try {
             connectToDatabase();
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Unable to connect to the database\n" + e.getMessage());
         }
         System.out.println("Connected to database!");
     }
@@ -102,6 +111,8 @@ public class Main {
     private static void connectToDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("org.mariadb.jdbc.Driver");
 
+//        String user = "tgandhi";
+//        String password = "200533319";
         String user = "snisar";
         String password = "dr.rada_dbms";
 
@@ -131,6 +142,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        System.out.println("Disconnected to database!");
+        System.out.println("Disconnected from database!");
     }
 }
