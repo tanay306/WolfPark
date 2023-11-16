@@ -14,6 +14,8 @@ public class Citation {
 		protected String lot_name;
 		protected String zone_id;
 		protected String space_number;
+		protected String license_number;
+		protected String permit_id;
 
 		protected Citation() {
 
@@ -257,6 +259,38 @@ public class Citation {
 		protected boolean containsAll(Statement statement, String lot_name, String zone_id, String space_number) {
 			ResultSet result = null;
 			String query = "Select * from space where lot_name = '" + lot_name + "'and zone_id = '" + zone_id + "' and space_number = " + space_number + " and  availability_slot = 1;";
+			try {
+				result = statement.executeQuery(query);
+				if (result.next()) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return true;
+		}
+
+		protected boolean containsLicenseNumber(Statement statement, String license_number) {
+			ResultSet result = null;
+			String query = "Select * from vehicle where license_number = '" + license_number + "';";
+			try {
+				result = statement.executeQuery(query);
+				if (result.next()) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return true;
+		}
+
+		protected boolean containsPermitId(Statement statement, String permit_id) {
+			ResultSet result = null;
+			String query = "Select * from permit where permit_id = '" + permit_id + "';";
 			try {
 				result = statement.executeQuery(query);
 				if (result.next()) {

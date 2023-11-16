@@ -173,6 +173,17 @@ public class ZoneDAO {
 	        }
 	        querySet = sqlHelper.mergerUpdate(setMap);
 	        
+	        if (!zone.containsParkingLot(statement)) {
+	        	System.out.println("Parking Lot not present!");
+	        	return;
+	        }
+	        
+	        Zone newZone = new Zone(lot_name_new, zone_id_new);
+	        if (!newZone.containsParkingLot(statement)) {
+	        	System.out.println("New Parking Lot not present in the parkinglot table!");
+	        	return;
+	        }
+	        
 	        zone.updateFiltered(statement, queryWhere, querySet);;
         }
 	}

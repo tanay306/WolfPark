@@ -10,6 +10,8 @@ public class Space {
 	private String space_number;
 	private String type;
 	private String availability_slot;
+
+    Space(){}
 	
     Space (String lot_name, String zone_id, String space_number, String type, String availability_slot) {
 		this.lot_name = lot_name;
@@ -22,6 +24,7 @@ public class Space {
     protected boolean containsZone(Statement statement) {
     	ResultSet result = null;
     	String query = "SELECT * FROM zone WHERE lot_name = '" + this.lot_name + "' AND zone_id = '" + this.zone_id +"';";
+    	System.out.println(query);
     	try {
     		result = statement.executeQuery(query);
     		if (result.next()) {
@@ -79,5 +82,43 @@ public class Space {
             Main.close();
         }
         return result;
+    }
+	
+	protected ResultSet viewFiltered(Statement statement, String queryParams) {
+        String query = "SELECT * FROM space WHERE " + queryParams + ";";
+        ResultSet result = null;
+        System.out.println(query);
+        try {
+            result = statement.executeQuery(query);
+            System.out.println("Completed: Space Query Select with Where");
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage());
+            Main.close();
+        }
+        return result;
+    }
+	
+	protected void updateFiltered(Statement statement, String queryParams, String querySet) {
+    	String query = "UPDATE space SET " + querySet + " WHERE " + queryParams + ";";
+        System.out.println(query);
+        try {
+            statement.executeUpdate(query);
+            System.out.println("Completed: Space Query Update");
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage() + "\n\nChanges trashed, try again!");
+            Main.close();
+        }
+    }
+	
+	protected static void deleteFiltered(Statement statement, String queryParams) {
+        String query = "DELETE FROM space WHERE " + queryParams + ";";
+        System.out.println(query);
+        try {
+            statement.executeQuery(query);
+            System.out.println("Completed: Space Query Delete");
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage());
+            Main.close();
+        }
     }
 }

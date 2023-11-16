@@ -1,8 +1,6 @@
 package com.tanay;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -212,39 +210,39 @@ public class ChecksDAO {
     }
 
     public void deleteChecksByFilters(Statement statement) {
-        SQLHelper.skipper();
-        System.out.print("Enter License Number (String): ");
-        String license_number = sc.nextLine();
-        
-        SQLHelper.skipper();
-        System.out.print("Enter Permit Id (Int): ");
-        String permit_id = sc.nextLine();
+		SQLHelper.skipper();
+		System.out.print("Enter License Number (String): ");
+		String license_number = sc.nextLine();
 
-        SQLHelper.skipper();
-        System.out.print("Enter Citation Number (Int): ");
-        String citation_number = sc.nextLine();
-        
-        Checks checks = new Checks(license_number, permit_id, citation_number);
-        String query = "";
-        
-        SQLHelper sqlHelper = new SQLHelper();
-        if(license_number.length() + permit_id.length() + citation_number.length() == 0) {
-            System.out.println("No Filters provided, showing all rows");
-            viewAllChecks(statement);
-        } else {
-            HashMap<String, String> whereMap = new HashMap<String, String>();
-            if(license_number.length() > 0) {
-                whereMap.put("license_number", sqlHelper.singleQuotes(license_number));
-            }
-            if(permit_id.length() > 0) {
-                whereMap.put("permit_id", sqlHelper.singleQuotes(permit_id));
-            }
-            if(citation_number.length() > 0) {
-                whereMap.put("citation_number", sqlHelper.singleQuotes(citation_number));
-            }
-            query = sqlHelper.merger(whereMap);
-            checks.deleteFiltered(statement, query);
-        }
+		SQLHelper.skipper();
+		System.out.print("Enter Permit Id (Int): ");
+		String permit_id = sc.nextLine();
+
+		SQLHelper.skipper();
+		System.out.print("Enter Citation Number (Int): ");
+		String citation_number = sc.nextLine();
+
+		Checks checks = new Checks(license_number, permit_id, citation_number);
+		String query = "";
+
+		SQLHelper sqlHelper = new SQLHelper();
+		if (license_number.length() + permit_id.length() + citation_number.length() == 0) {
+			System.out.println("No Filters provided, showing all rows");
+			viewAllChecks(statement);
+		} else {
+			HashMap<String, String> whereMap = new HashMap<String, String>();
+			if (license_number.length() > 0) {
+				whereMap.put("license_number", sqlHelper.singleQuotes(license_number));
+			}
+			if (permit_id.length() > 0) {
+				whereMap.put("permit_id", sqlHelper.singleQuotes(permit_id));
+			}
+			if (citation_number.length() > 0) {
+				whereMap.put("citation_number", sqlHelper.singleQuotes(citation_number));
+			}
+			query = sqlHelper.merger(whereMap);
+			checks.deleteFiltered(statement, query);
+		}
 	}
 
 }

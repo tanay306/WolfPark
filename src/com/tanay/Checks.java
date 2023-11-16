@@ -175,7 +175,10 @@ public class Checks {
     	String query;
     	if (this.citation_number == "") {
     		query = "INSERT INTO checks VALUES ('" + this.license_number + "',null,'" + this.permit_id + "');";
-    	} else {
+    	} else if (this.license_number == "") {
+    		query = "INSERT INTO checks VALUES (null,'" + this.citation_number + "','" + this.permit_id + "');";
+    	}
+    	else {
     		query = "INSERT INTO checks VALUES ('" + this.license_number + "','" + this.permit_id + "','" + this.citation_number + "');";
     	}
     	System.out.println(query);
