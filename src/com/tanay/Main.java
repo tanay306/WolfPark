@@ -14,14 +14,12 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         initialize();
-
         menu();
-
         close();
     }
 
     private static void menu() {
-        while(true) {
+        while (true) {
             System.out.print("\nMenu\n"
                     + "1. Driver\n"
                     + "2. Vehicle\n"
@@ -38,7 +36,7 @@ public class Main {
                     + "-1. End\n"
                     + "\nSelect one option: ");
             String input = sc.nextLine();
-            switch(input) {
+            switch (input) {
                 case "1":
                     DriverDAO driverDAO = new DriverDAO();
                     driverDAO.menuDriver(statement, connection);
@@ -68,8 +66,8 @@ public class Main {
                     spaceDAO.menuSpace(statement, connection);
                     break;
                 case "8":
-//                    AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
-//                    associatedWithDAO.menuAssociated(statement, connection);
+                     AssociatedWithDAO associatedWithDAO = new AssociatedWithDAO();
+                     associatedWithDAO.menuAssociatedWith(statement, connection);
                 case "9":
                     CitationDAO citationDAO = new CitationDAO();
                     citationDAO.menuCategory(statement, connection);
@@ -99,7 +97,7 @@ public class Main {
         try {
             connectToDatabase();
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Unable to connect to the database\n" + e.getMessage());
         }
         System.out.println("Connected to database!");
     }
@@ -136,6 +134,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        System.out.println("Disconnected to database!");
+        System.out.println("Disconnected from database!");
     }
 }
