@@ -14,7 +14,6 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         initialize();
-        
         // Parking lot Queries
 //        ParkingLotDAO parkingLotDAO = new ParkingLotDAO(); 
 //        parkingLotDAO.createParkingLot(statement, connection);
@@ -26,18 +25,18 @@ public class Main {
 //        parkingLotDAO.menuParkingLot(statement, connection);
         
         // Zone Queries
-//        ZoneDAO zoneDAO = new ZoneDAO();
+        ZoneDAO zoneDAO = new ZoneDAO();
 //        zoneDAO.createZone(statement, connection);
 //        zoneDAO.insertZone(statement);
 //        zoneDAO.viewAllZone(statement);
 //        zoneDAO.viewZoneByFilters(statement);
 //        zoneDAO.updateParkingLot(statement);
 //        zoneDAO.deleteZoneByFilters(statement);
-//        zoneDAO.menuZone(statement, connection);
+        zoneDAO.menuZone(statement, connection);
         
         // Space Queries
-        SpaceDAO spaceDAO = new SpaceDAO();
-        spaceDAO.menuSpace(statement, connection);
+//        SpaceDAO spaceDAO = new SpaceDAO();
+//        spaceDAO.menuSpace(statement, connection);
 
         // Category
 //        CategoryDAO categoryDAO = new CategoryDAO();
