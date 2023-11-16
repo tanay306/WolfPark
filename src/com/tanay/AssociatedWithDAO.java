@@ -70,7 +70,7 @@ public class AssociatedWithDAO {
 		String zone_id = sc.nextLine();
 		System.out.print("Enter Space Number (Int): ");
 		String space_number = sc.nextLine();
-		System.out.print("Enter Permit ID (Int): ");
+		System.out.print("Enter Permit ID (String): ");
 		String permit_id = sc.nextLine();
 
 		AssociatedWith associatedWith = new AssociatedWith(permit_id, space_number, zone_id, lot_name);
@@ -119,7 +119,7 @@ public class AssociatedWithDAO {
 		String space_number = sc.nextLine();
 
 		SQLHelper.skipper();
-		System.out.print("Enter Permit ID (Int): ");
+		System.out.print("Enter Permit ID (String): ");
 		String permit_id = sc.nextLine();
 
 		AssociatedWith associatedWith = new AssociatedWith(permit_id, space_number, zone_id, lot_name);
@@ -190,11 +190,11 @@ public class AssociatedWithDAO {
 		String space_number_new = sc.nextLine();
 
 		SQLHelper.skipper();
-		System.out.print("Enter Permit ID (Int): ");
+		System.out.print("Enter Permit ID (String): ");
 		String permit_id = sc.nextLine();
 
 		SQLHelper.skipper();
-		System.out.print("Enter NEW Permit ID (Int): ");
+		System.out.print("Enter NEW Permit ID (String): ");
 		String permit_id_new = sc.nextLine();
 
 		AssociatedWith associatedWith = new AssociatedWith(permit_id, space_number, zone_id, lot_name);
@@ -279,7 +279,7 @@ public class AssociatedWithDAO {
 		String space_number = sc.nextLine();
 
 		SQLHelper.skipper();
-		System.out.print("Enter Permit ID (Int): ");
+		System.out.print("Enter Permit ID (String): ");
 		String permit_id = sc.nextLine();
 
 		// Space space = new Space(lot_name, zone_id, space_number, type,

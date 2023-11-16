@@ -101,7 +101,7 @@ public class Vehicle {
     	return true;
     }
 	
-	protected static boolean containsVehicle(Statement statement, String license_number) {
+	protected boolean containsVehicle(Statement statement, String license_number) {
     	ResultSet result = null;
     	String query = "SELECT * FROM vehicle WHERE license_number = '" + license_number +  "';";
     	try {
