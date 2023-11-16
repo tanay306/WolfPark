@@ -48,7 +48,7 @@ public class DriverDAO {
 				break;
 			default:
 				System.out.println("Invalid Entry");
-				this.menuDriver(statement, connection);
+				break;
 		}
 	}
 	
