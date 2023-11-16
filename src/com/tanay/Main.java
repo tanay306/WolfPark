@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Main {
 
-    static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/tgandhi";
+    static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/snisar";
 
     private static Connection connection = null;
     private static Statement statement = null;
@@ -36,8 +36,8 @@ public class Main {
         // SpaceDAO spaceDAO = new SpaceDAO();
         // spaceDAO.menuSpace(statement, connection);
 
-        CitationDAO c = new CitationDAO();
-        c.menuCategory(statement, connection);
+        // CitationDAO c = new CitationDAO();
+        // c.menuCategory(statement, connection);
 
         // ChecksDAO checks = new ChecksDAO();
         // checks.menuCategory(statement, connection);
@@ -47,14 +47,14 @@ public class Main {
         // categoryDAO.menuCategory(statement, connection);
 
         // Driver Queries
-        // DriverDAO driverDAO = new DriverDAO();
+        DriverDAO driverDAO = new DriverDAO();
         // driverDAO.createDriver(statement, connection);
         // driverDAO.insertDriver(statement);
         // driverDAO.viewAllDriver(statement);
         // driverDAO.viewDriverByFilters(statement);
         // driverDAO.updateDriver(statement);
         // driverDAO.deleteDriverByFilters(statement);
-        // driverDAO.menuDriver(statement, connection);
+        driverDAO.menuDriver(statement, connection);
 
         // Vehicle Queries
         // VehicleDAO vehicleDAO = new VehicleDAO();
@@ -100,8 +100,8 @@ public class Main {
     private static void connectToDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("org.mariadb.jdbc.Driver");
 
-        String user = "tgandhi";
-        String password = "200533319";
+        String user = "snisar";
+        String password = "dr.rada_dbms";
 
         connection = DriverManager.getConnection(jdbcURL, user, password);
         statement = connection.createStatement();
