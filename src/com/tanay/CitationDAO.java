@@ -449,28 +449,25 @@ public class CitationDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (
-				(Integer.valueOf(expiration_date.substring(0,4)) - Integer.valueOf(now_date.substring(0,4)) > 0)
-						|| ((Integer.valueOf(expiration_date.substring(0,4)) -Integer.valueOf(now_date.substring(0,4)) == 0 ) && (Integer.valueOf(expiration_date.substring(5,7)) - Integer.valueOf(now_date.substring(5,7)) > 0))
-						|| ((Integer.valueOf(expiration_date.substring(0,4)) -Integer.valueOf(now_date.substring(0,4)) == 0 ) && (Integer.valueOf(expiration_date.substring(5,7)) - Integer.valueOf(now_date.substring(5,7)) == 0)  && (Integer.valueOf(expiration_date.substring(8,10)) - Integer.valueOf(now_date.substring(8,10)) > 0))
-		) {
-			System.out.println(expiration_date + "//" + now_date);
-			System.out.println("Expired Permitsss");
+		String a = expiration_date.replace("-", "");
+		String a_ = now_date.replace("-", "");
+		String b = expiration_time.replace(":","");
+		String b_ = now_time.replace(":", "");
+		if (Integer.valueOf(a) - Integer.valueOf(a_) < 0) {
+			System.out.println(Integer.valueOf(a) - Integer.valueOf(a_));
+			System.out.println("Expired Permits");
 			return;
-		} else if (expiration_date.equals(now_date)) {
-			if (Integer.valueOf(expiration_time.substring(0,2)) > Integer.valueOf(now_time.substring(0,2)) ||
-					Integer.valueOf(expiration_time.substring(0,2)) == Integer.valueOf(now_time.substring(0,2)) && Integer.valueOf(expiration_time.substring(3,5)) > Integer.valueOf(now_time.substring(3,5))) {
-				System.out.println("Expired Permit");
-				return;
-			}
+		}
+		else if (Integer.valueOf(a) - Integer.valueOf(a_) == 0 && Integer.valueOf(b) - Integer.valueOf(b_) < 0) {
+			System.out.println("Expired Permits");
+			return;
+		}
+		if (Permit.containsVehicle(statement, vehicle)) {
+			System.out.println("No Permit");
+			return;
 		}
 		if (!vehicle.equals(vehicle_id)) {
 			System.out.println("Invalid Permit");
-			return;
-		}
-		Vehicle vehicle1 = new Vehicle();
-		if (!vehicle1.containsVehicle(statement, vehicle)) {
-			System.out.println("No Permit");
 			return;
 		}
 	}
