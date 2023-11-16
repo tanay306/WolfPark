@@ -67,6 +67,11 @@ public class ZoneDAO {
         
         Zone zone = new Zone(lot_name, zone_id);
         
+        if (zone.containsZone(statement)) {
+        	System.out.println("Zone already registered! Please try again.");
+        	return;
+        }
+        
         if (!zone.containsParkingLot(statement)) {
         	System.out.println("Parking Lot not present!");
         	return;

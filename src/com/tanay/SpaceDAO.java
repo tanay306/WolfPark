@@ -72,6 +72,11 @@ public class SpaceDAO {
 
 		Space space = new Space(lot_name, zone_id, space_number, type, availability_slot);
 
+		if (space.containsSpace(statement)) {
+        	System.out.println("Space is already registered, Please try Again!");
+        	return;
+        }
+		
 		if (!space.containsZone(statement)) {
 			System.out.println("Zone not present!");
 			return;

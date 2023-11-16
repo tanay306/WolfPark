@@ -29,6 +29,22 @@ public class Zone {
     	return true;
     }
 	
+	protected boolean containsZone(Statement statement) {
+    	ResultSet result = null;
+    	String query = "SELECT * FROM zone WHERE lot_name = '" + this.lot_name + "' AND zone_id = '" + this.zone_id + "';";
+    	try {
+    		result = statement.executeQuery(query);
+    		if (result.next()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return true;
+    }
+	
 	protected static void create(Statement statement) {
         String query = "CREATE TABLE zone"
         		+ "("
