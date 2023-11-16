@@ -105,12 +105,16 @@ public class CitationDAO {
             System.out.println("Space not present!");
         	return;
         }
-        if (!category.equals("No Permit") && ! citation.containsLicenseNumber(statement, license_number)) {
-			System.out.println("License Number not present!");
-			return;
-		}
+//        if (!category.equals("No Permit") && ! citation.containsLicenseNumber(statement, license_number)) {
+//			System.out.println("License Number not present!");
+//			return;
+//		}
         citation.insert(statement);
 		Checks checks = new Checks(license_number, permit_id, citation_number);
+		if (!citation.containsLicenseNumber(statement, license_number)) {
+			Vehicle v = new Vehicle(license_number, "unknown", "unknown", "0000-00-00", 0, "null", "-1", "-1");
+			v.insert(statement);
+		}
 		checks.insert(statement);
 	}
 

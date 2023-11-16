@@ -6,14 +6,14 @@ import java.sql.Statement;
 
 public class Vehicle {
 	
-	private String license_number;
-	private String color;
-	private String model;
-	private String manufacture_year;
-	private int is_handicapped;
-	private String manufacturer;
-	private String univ_id;
-	private String phone_number;
+	protected String license_number;
+	protected String color;
+	protected String model;
+	protected String manufacture_year;
+	protected int is_handicapped;
+	protected String manufacturer;
+	protected String univ_id;
+	protected String phone_number;
 	
 	protected Vehicle() {}
 	
@@ -33,11 +33,11 @@ public class Vehicle {
 	protected static void create(Statement statement) {
         String query = "CREATE TABLE vehicle("
         		+ "license_number VARCHAR(8),"
-        		+ "color VARCHAR(30) NOT NULL,"
-        		+ "model VARCHAR(255) NOT NULL,"
-        		+ "manufacture_year DATE NOT NULL,"
-        		+ "is_handicapped BOOL NOT NULL DEFAULT false,"
-        		+ "manufacturer VARCHAR(255) NOT NULL,"
+        		+ "color VARCHAR(30),"
+        		+ "model VARCHAR(255) ,"
+        		+ "manufacture_year DATE ,"
+        		+ "is_handicapped BOOL  DEFAULT false,"
+        		+ "manufacturer VARCHAR(255),"
         		+ "univ_id CHAR(9),"
         		+ "phone_number CHAR(10),"
         		+ "FOREIGN KEY(univ_id, phone_number) REFERENCES driver(univ_id, phone_number)"

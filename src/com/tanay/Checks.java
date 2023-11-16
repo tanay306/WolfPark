@@ -179,7 +179,7 @@ public class Checks {
     		query = "INSERT INTO checks VALUES (null,'" + this.citation_number + "','" + this.permit_id + "');";
     	}
     	else {
-    		query = "INSERT INTO checks VALUES ('" + this.license_number + "','" + this.permit_id + "','" + this.citation_number + "');";
+    		query = "INSERT INTO checks VALUES ('" + this.license_number + "','" + this.citation_number + "','" + this.permit_id + "');";
     	}
     	System.out.println(query);
         try {
