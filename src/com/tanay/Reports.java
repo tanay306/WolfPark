@@ -171,7 +171,13 @@ public class Reports {
             System.out.println("No such type is present!");
             return;
         }
-        String query = "select * from space where availability_slot = 1 and type = '" + type + "';";
+        System.out.print("Enter Parking Lot (String): ");
+        String lot_name = sc.nextLine();
+        if (!isPresentLot(statement, lot_name)) {
+            System.out.println("No such parking lot is present!");
+            return;
+        }
+        String query = "select * from space where availability_slot = 1 and type = '" + type + "' and lot_name = '" + lot_name + "';";
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
@@ -182,6 +188,22 @@ public class Reports {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    private boolean isPresentLot(Statement statement, String lot) {
+        String query = "select * from parkinglot where lot_name = '" + lot + "';";
+        ResultSet result = null;
+        try {
+            result = statement.executeQuery(query);
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private boolean isPresent(Statement statement, String type) {
