@@ -32,19 +32,18 @@ public class Vehicle {
 
 	// Create Query for Driver
 	protected static void create(Statement statement) {
-		String query = "CREATE TABLE vehicle("
-				+ "license_number VARCHAR(8),"
-				+ "color VARCHAR(30),"
-				+ "model VARCHAR(255) ,"
-				+ "manufacture_year DATE ,"
-				+ "is_handicapped BOOL  DEFAULT false,"
-				+ "manufacturer VARCHAR(255),"
-				+ "univ_id CHAR(9),"
-				+ "phone_number CHAR(10),"
-				+ "FOREIGN KEY(univ_id, phone_number) REFERENCES driver(univ_id, phone_number)"
-				+ " ON UPDATE CASCADE ON DELETE SET NULL,"
-				+ "PRIMARY KEY (license_number)"
-				+ ");";
+		String query = "CREATE TABLE vehicle ("
+		        + "license_number VARCHAR(8), "
+		        + "color VARCHAR(30), "
+		        + "model VARCHAR(255), "
+		        + "manufacture_year DATE, "
+		        + "is_handicapped BOOL DEFAULT false, "
+		        + "manufacturer VARCHAR(255), "
+		        + "univ_id CHAR(9), "
+		        + "phone_number CHAR(10), "
+		        + "FOREIGN KEY(univ_id, phone_number) REFERENCES driver(univ_id, phone_number) ON UPDATE CASCADE ON DELETE SET NULL, "
+		        + "PRIMARY KEY (license_number)"
+		        + ")";
 		try {
 			statement.executeQuery(query);
 			System.out.println("Completed: Vehicle Query Create");

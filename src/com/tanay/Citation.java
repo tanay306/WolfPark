@@ -320,6 +320,7 @@ public class Citation {
 		String query = "INSERT INTO citation VALUES ('" + this.citation_number + "','" + this.citation_date + "','"
 				+ this.citation_time + "','" + this.category + "','" + this.payment_status + "','" + this.lot_name
 				+ "','" + this.zone_id + "','" + this.space_number + "');";
+		System.out.println(query);
 		try {
 			statement.executeUpdate(query);
 			System.out.println("Completed: Citation Query Insert");

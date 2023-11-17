@@ -86,12 +86,15 @@ public class CitationDAO {
 		String space_number = sc.nextLine();
 		System.out.print("Enter License Number (String): ");
 		String license_number = sc.nextLine();
+		System.out.print("Enter Model (String): ");
+		String model = sc.nextLine();
+		System.out.print("Enter Color (String): ");
+		String color = sc.nextLine();
 		System.out.print("Enter Permit ID (String): ");
 		String permit_id = sc.nextLine();
 
 		Citation citation = new Citation(citation_number, citation_date, citation_time, category, payment_status,
 				lot_name, zone_id, space_number);
-		System.out.println(category + !category.equals("No Permit"));
 		if (citation.containsCitation(statement)) {
 			System.out.println("Citation already present!");
 			return;
@@ -127,7 +130,7 @@ public class CitationDAO {
 			// 1 or more queries or updates
 			citation.insert(statement);
 			if (!citation.containsLicenseNumber(statement, license_number)) {
-				Vehicle v = new Vehicle(license_number, "unknown", "unknown", "0000-00-00", 0, "null", "-1", "-1");
+				Vehicle v = new Vehicle(license_number, color, model, "0000-00-00", 0, "null", "-1", "-1");
 				v.insert(statement);
 			}
 			checks.insert(statement);

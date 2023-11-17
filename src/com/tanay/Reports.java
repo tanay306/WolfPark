@@ -24,8 +24,8 @@ public class Reports {
                 + "e. Return the number of employees having permits for a given parking zone.\n"
                 + "f. Return permit information given an ID or phone number.\n"
                 + "g. Return an available space number given a space type in a given parking lot.\n"
-                + "h. Select all vehicles with the type of “Park & Ride” which have a permit.\n"
-                + "i. Return the name of the driver and the parking lot, zone and space he/she is permitted"
+                + "h. Select all vehicles with permit_type which have a permit.\nResidential, Commuter, Peak Hours, Special Event, and Park & Ride\n"
+                + "i. Return the name of the driver and the parking lot, zone and space he/she is permitted\n"
                 + "Select one option: ");
 
         Reports report = new Reports();
@@ -223,7 +223,9 @@ public class Reports {
     }
 
     private void selectParkAndRide(Statement statement) {
-        String query = "SELECT v.license_number, v.model, v.color, p.start_date, p.expiration_date FROM vehicle v JOIN permit p where v.license_number = p.vehicle_id AND p.type = 'Park & Ride';";
+    	System.out.print("Enter Permit Type (String): ");
+        String type = sc.nextLine();
+        String query = "SELECT v.license_number, v.model, v.color, p.start_date, p.expiration_date FROM vehicle v JOIN permit p where v.license_number = p.vehicle_id AND p.type = '" + type + "';";
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);

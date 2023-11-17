@@ -117,7 +117,7 @@ public class VehicleDAO {
 						+ "), (" + result.getString("model")
 						+ "), (" + result.getString("manufacture_year") + "), (" + result.getString("is_handicapped")
 						+ "), (" + result.getString("manufacturer")
-						+ "), (" + result.getString("univ_id") + "), (" + result.getString("phone_number") + ")]\n");
+						+ "), (" + result.getString("univ_id") + "), (" + result.getString("phone_number") + ")]");
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -216,7 +216,7 @@ public class VehicleDAO {
 										+ result.getString("model") + "), (" + result.getString("manufacture_year")
 										+ "), (" + result.getString("is_handicapped") + "), ("
 										+ result.getString("manufacturer") + "), (" + result.getString("univ_id")
-										+ "), (" + result.getString("phone_number") + ")]\n");
+										+ "), (" + result.getString("phone_number") + ")]");
 					} while (result.next());
 				} else {
 					System.out.println("*** No Rows returned ***");
