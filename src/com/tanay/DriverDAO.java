@@ -91,7 +91,7 @@ public class DriverDAO {
 			while (result.next()) {
 				System.out.println("[(" + result.getString("univ_id") + "), (" + result.getString("phone_number") + "), "
 						+ "(" + result.getString("name") + "), (" + result.getString("status") + "), "
-								+ "(" + result.getString("no_of_permits") + ")]\n");
+								+ "(" + result.getString("no_of_permits") + ")]");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,7 +156,7 @@ public class DriverDAO {
 	        		do{
 	        			System.out.println("[(" + result.getString("univ_id") + "), (" + result.getString("phone_number") + "), "
 	    						+ "(" + result.getString("name") + "), (" + result.getString("status") + "), "
-	    								+ "(" + result.getString("no_of_permits") + ")]\n");
+	    								+ "(" + result.getString("no_of_permits") + ")]");
 	        		}while (result.next());
 	        	} else {
 	        		System.out.println("*** No Rows returned ***");

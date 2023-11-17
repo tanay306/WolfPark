@@ -81,7 +81,7 @@ public class Driver {
             statement.executeUpdate(query);
             System.out.println("Completed: Driver Query Insert");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println("Error Encountered\nFailed: Driver Query Insert");
             Main.close();
         }
 	}
@@ -94,7 +94,7 @@ public class Driver {
             result = statement.executeQuery(query);
             System.out.println("Completed: Driver Query Select");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println(e.getMessage());
             Main.close();
         }
         return result;
@@ -110,7 +110,7 @@ public class Driver {
             result = statement.executeQuery(query);
             System.out.println("Completed: Driver Query Select with Where");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	System.out.println(e.getMessage());
             Main.close();
         }
         return result;

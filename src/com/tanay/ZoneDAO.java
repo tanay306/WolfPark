@@ -88,7 +88,7 @@ public class ZoneDAO {
 				System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("zone_id") + ")]");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class ZoneDAO {
 	        		System.out.println("*** No Rows returned ***");
 	        	}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
         }
 	}
@@ -184,7 +184,7 @@ public class ZoneDAO {
 	        }
 	        
 	        Zone newZone = new Zone(lot_name_new, zone_id_new);
-	        if (!newZone.containsParkingLot(statement)) {
+	        if (lot_name_new.length() > 0 && !newZone.containsParkingLot(statement)) {
 	        	System.out.println("New Parking Lot not present in the parkinglot table!");
 	        	return;
 	        }

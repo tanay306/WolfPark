@@ -84,7 +84,7 @@ public class ParkingLotDAO {
 				System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("address") + ")]");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class ParkingLotDAO {
 	        		System.out.println("*** No Rows returned ***");
 	        	}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
         }
 	}

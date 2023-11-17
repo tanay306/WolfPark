@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/snisar";
+    static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/ndudhel";
 
     private static Connection connection = null;
     private static Statement statement = null;
@@ -21,6 +21,7 @@ public class Main {
     private static void menu() {
         while (true) {
             System.out.print("\nMenu\n"
+            		+ "0. Reconnect Database\n"
                     + "1. Driver\n"
                     + "2. Vehicle\n"
                     + "3. Permit\n"
@@ -38,6 +39,9 @@ public class Main {
                     + "\nSelect one option: ");
             String input = sc.nextLine();
             switch (input) {
+            	case "0":
+            		initialize();
+            		break;
                 case "1":
                     DriverDAO driverDAO = new DriverDAO();
                     driverDAO.menuDriver(statement, connection);
@@ -113,8 +117,10 @@ public class Main {
 
 //        String user = "tgandhi";
 //        String password = "200533319";
-        String user = "snisar";
-        String password = "dr.rada_dbms";
+//        String user = "snisar";
+//        String password = "dr.rada_dbms";
+        String user = "ndudhel";
+        String password = "NeeL3172001";
 
         connection = DriverManager.getConnection(jdbcURL, user, password);
         statement = connection.createStatement();
@@ -124,6 +130,7 @@ public class Main {
         if (connection != null) {
             try {
                 connection.close();
+                System.out.println("Connection closed");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -131,6 +138,7 @@ public class Main {
         if (statement != null) {
             try {
                 statement.close();
+                System.out.println("Statement closed");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
