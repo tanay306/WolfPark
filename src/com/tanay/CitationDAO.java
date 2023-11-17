@@ -135,13 +135,14 @@ public class CitationDAO {
 //			}
 			//********* Commiting Transaction **************
 			connection.commit();
-			System.out.println("Success");
+			System.out.println("Transaction => Success");
+			connection.setAutoCommit(true);
 		} catch(SQLException e) {
 			if(connection != null) {
 				try {
 					//********* Rollback Transaction **************
 					connection.rollback();
-					System.out.println("Rolling back...");
+					System.out.println("Transaction Failed, Rolling back...");
 					connection.setAutoCommit(true);
 				} catch(SQLException e1) {
 					e.printStackTrace();
