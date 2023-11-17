@@ -73,10 +73,10 @@ public class SpaceDAO {
 		Space space = new Space(lot_name, zone_id, space_number, type, availability_slot);
 
 		if (space.containsSpace(statement)) {
-        	System.out.println("Space is already registered, Please try Again!");
-        	return;
-        }
-		
+			System.out.println("Space is already registered, Please try Again!");
+			return;
+		}
+
 		if (!space.containsZone(statement)) {
 			System.out.println("Zone not present!");
 			return;
@@ -95,7 +95,7 @@ public class SpaceDAO {
 						+ result.getString("availability_slot") + ")]");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -161,7 +161,7 @@ public class SpaceDAO {
 					System.out.println("*** No Rows returned ***");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 	}

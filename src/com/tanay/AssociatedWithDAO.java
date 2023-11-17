@@ -101,7 +101,7 @@ public class AssociatedWithDAO {
 						+ result.getString("space_number") + ")]");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -159,7 +159,7 @@ public class AssociatedWithDAO {
 					System.out.println("*** No Rows returned ***");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 	}

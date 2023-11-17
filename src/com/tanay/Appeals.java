@@ -11,7 +11,7 @@ public class Appeals {
     protected String citation_number;
 
     protected Appeals() {
-        
+
     }
 
     protected Appeals(String univ_id, String phone_number, String citation_number) {
@@ -45,51 +45,54 @@ public class Appeals {
     }
 
     protected boolean containsAppeals(Statement statement) {
-    	ResultSet result = null;
-    	String query = "SELECT * FROM appeals WHERE univ_id = '" + this.univ_id+ "' AND phone_number = '" + this.phone_number + "' AND citation_number = " + this.citation_number + ";";
-    	try {
-    		result = statement.executeQuery(query);
-    		if (result.next()) {
-    			return true;
-    		} else {
-    			return false;
-    		}
-    	} catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet result = null;
+        String query = "SELECT * FROM appeals WHERE univ_id = '" + this.univ_id + "' AND phone_number = '"
+                + this.phone_number + "' AND citation_number = " + this.citation_number + ";";
+        try {
+            result = statement.executeQuery(query);
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-    	return true;
+        return true;
     }
 
     protected boolean containsDriver(Statement statement) {
-    	ResultSet result = null;
-    	String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id + "' AND phone_number = '" + this.phone_number + "';";
-    	try {
-    		result = statement.executeQuery(query);
-    		if (result.next()) {
-    			return true;
-    		} else {
-    			return false;
-    		}
-    	} catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet result = null;
+        String query = "SELECT * FROM driver WHERE univ_id = '" + this.univ_id + "' AND phone_number = '"
+                + this.phone_number + "';";
+        try {
+            result = statement.executeQuery(query);
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-    	return true;
+        return true;
     }
 
     protected boolean containsDriver(Statement statement, String univ_id, String phone_number) {
-    	ResultSet result = null;
-    	String query = "SELECT * FROM driver WHERE univ_id = '" + univ_id+ "' AND phone_number = '" + phone_number + "';";
-    	try {
-    		result = statement.executeQuery(query);
-    		if (result.next()) {
-    			return true;
-    		} else {
-    			return false;
-    		}
-    	} catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet result = null;
+        String query = "SELECT * FROM driver WHERE univ_id = '" + univ_id + "' AND phone_number = '" + phone_number
+                + "';";
+        try {
+            result = statement.executeQuery(query);
+            if (result.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-    	return true;
+        return true;
     }
 
     protected boolean containsCitation(Statement statement) {
@@ -103,7 +106,7 @@ public class Appeals {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return true;
     }
@@ -119,7 +122,7 @@ public class Appeals {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return true;
     }
@@ -135,13 +138,14 @@ public class Appeals {
     }
 
     protected void insert(Statement statement) {
-        String query = "INSERT INTO appeals VALUES ('" + this.univ_id + "','" + this.phone_number + "'," + this.citation_number + ");";
+        String query = "INSERT INTO appeals VALUES ('" + this.univ_id + "','" + this.phone_number + "',"
+                + this.citation_number + ");";
         System.out.println(query);
         try {
             statement.executeUpdate(query);
             System.out.println("Completed: Appeals Query Insert");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -152,11 +156,11 @@ public class Appeals {
             result = statement.executeQuery(query);
             System.out.println("Completed: Appeals Query Select");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return result;
     }
-    
+
     protected ResultSet viewFiltered(Statement statement, String queryParams) {
         String query = "SELECT * FROM appeals WHERE " + queryParams + ";";
         ResultSet result = null;
@@ -164,29 +168,29 @@ public class Appeals {
             result = statement.executeQuery(query);
             System.out.println("Completed: Appeals Query Select with Where");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return result;
     }
-    
+
     protected void viewUpdateFiltered(Statement statement, String queryParams, String querySet) {
-    	String query = "UPDATE appeals SET " + querySet + " WHERE " + queryParams + ";";
-    	System.out.println(query);
+        String query = "UPDATE appeals SET " + querySet + " WHERE " + queryParams + ";";
+        System.out.println(query);
         try {
             statement.executeUpdate(query);
             System.out.println("Completed: Appeals Query Update");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
-    
+
     protected void deleteFiltered(Statement statement, String queryParams) {
         String query = "DELETE FROM appeals WHERE " + queryParams + ";";
         try {
             statement.executeQuery(query);
             System.out.println("Completed: Appeals Query Delete");
         } catch (SQLException e) {
-        	System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
             Main.close();
         }
     }

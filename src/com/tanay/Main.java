@@ -21,7 +21,7 @@ public class Main {
     private static void menu() {
         while (true) {
             System.out.print("\nMenu\n"
-            		+ "0. Reconnect Database\n"
+                    + "0. Reconnect Database\n"
                     + "1. Driver\n"
                     + "2. Vehicle\n"
                     + "3. Permit\n"
@@ -39,9 +39,9 @@ public class Main {
                     + "\nSelect one option: ");
             String input = sc.nextLine();
             switch (input) {
-            	case "0":
-            		initialize();
-            		break;
+                case "0":
+                    initialize();
+                    break;
                 case "1":
                     DriverDAO driverDAO = new DriverDAO();
                     driverDAO.menuDriver(statement, connection);
@@ -77,7 +77,7 @@ public class Main {
                 case "9":
                     CategoryDAO categoryDAO = new CategoryDAO();
                     categoryDAO.menuCategory(statement, connection);
-                    break;    
+                    break;
                 case "10":
                     CitationDAO citationDAO = new CitationDAO();
                     citationDAO.menuCategory(statement, connection);
@@ -91,9 +91,9 @@ public class Main {
                     appealsDAO.menuCategory(statement, connection);
                     break;
                 case "13":
-                	Reports report = new Reports();
-                	report.menuCategory(statement, connection);
-                	break;
+                    Reports report = new Reports();
+                    report.menuCategory(statement, connection);
+                    break;
                 case "-1":
                     return;
                 default:
@@ -115,10 +115,10 @@ public class Main {
     private static void connectToDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("org.mariadb.jdbc.Driver");
 
-//        String user = "tgandhi";
-//        String password = "200533319";
-//        String user = "snisar";
-//        String password = "dr.rada_dbms";
+        // String user = "tgandhi";
+        // String password = "200533319";
+        // String user = "snisar";
+        // String password = "dr.rada_dbms";
         String user = "ndudhel";
         String password = "NeeL3172001";
 
@@ -132,7 +132,7 @@ public class Main {
                 connection.close();
                 System.out.println("Connection closed");
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
         if (statement != null) {
@@ -140,14 +140,14 @@ public class Main {
                 statement.close();
                 System.out.println("Statement closed");
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
         if (result != null) {
             try {
                 result.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("Disconnected from database!");

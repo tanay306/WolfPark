@@ -78,7 +78,7 @@ public class Reports {
                         + result.getString("total_no_of_citations") + ")]");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ public class Reports {
                 System.out.println("[(" + result.getString("lot_name") + "), (" + result.getString("zone_id") + ")]");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ public class Reports {
                 System.out.println("[(" + result.getString("total") + ")]");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -122,7 +122,7 @@ public class Reports {
                 System.out.println("[(" + result.getString("total") + ")]");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -160,7 +160,7 @@ public class Reports {
                         + result.getString("zone_id") + "), (" + result.getString("lot_name") + ")]");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -180,7 +180,7 @@ public class Reports {
                         + result.getString("space_number") + ")]");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -195,7 +195,7 @@ public class Reports {
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return false;
     }

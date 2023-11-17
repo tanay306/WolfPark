@@ -32,7 +32,7 @@ public class AssociatedWith {
 				return false;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return true;
 	}
@@ -56,7 +56,7 @@ public class AssociatedWith {
 				return false;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return true;
 	}
@@ -73,7 +73,7 @@ public class AssociatedWith {
 				return false;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return true;
 	}
