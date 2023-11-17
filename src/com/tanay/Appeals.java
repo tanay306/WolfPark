@@ -138,8 +138,8 @@ public class Appeals {
     }
 
     protected void insert(Statement statement) {
-        String query = "INSERT INTO appeals VALUES ('" + this.univ_id + "','" + this.phone_number + "',"
-                + this.citation_number + ");";
+        String query = "INSERT INTO appeals VALUES ('" + this.univ_id + "','" + this.phone_number + "','"
+                + this.citation_number + "');";
         System.out.println(query);
         try {
             statement.executeUpdate(query);

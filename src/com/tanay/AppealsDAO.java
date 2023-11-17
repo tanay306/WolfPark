@@ -74,10 +74,10 @@ public class AppealsDAO {
 		String citation_number = sc.nextLine();
 
 		Appeals appeals = new Appeals(univ_id, phone_number, citation_number);
-		if (appeals.containsAppeals(statement)) {
-			System.out.println("Appeals already present!");
-			return;
-		}
+//		if (appeals.containsAppeals(statement)) {
+//			System.out.println("Appeals already present!");
+//			return;
+//		}
 		appeals.insert(statement);
 	}
 
